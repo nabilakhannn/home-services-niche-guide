@@ -25,6 +25,9 @@ const HVAC_IMG    = "https://d2xsxph8kpxj0f.cloudfront.net/310519663206244947/jt
 const PLUMB_IMG   = "https://d2xsxph8kpxj0f.cloudfront.net/310519663206244947/jt9SAM2mN4CpsewZpdVEXA/plumbing_final-Ga6JjwjPyKVuqv2G5F7ZRF.webp";
 const ROOF_IMG    = "https://d2xsxph8kpxj0f.cloudfront.net/310519663206244947/jt9SAM2mN4CpsewZpdVEXA/roofing_final-95Vem9XTkVJkZvUmbNJ9db.webp";
 
+/** “Missed calls” block: robot takes the phone so the tech can work — local asset in `client/public/` */
+const ROBOT_HANDOFF_IMG = "/contractor-robot-phone-handoff.jpg";
+
 const ORANGE = "#D4622A";
 
 // ── Intersection Observer hook for scroll animations ──
@@ -355,7 +358,12 @@ export default function Home() {
             {/* Image: right column with floating badge */}
             <div className="relative">
               <div className="rounded-2xl overflow-hidden shadow-2xl" style={{ aspectRatio: "4/3" }}>
-                <img src={AI_IMG} alt="AI phone assistant answering contractor calls" className="w-full h-full object-cover" loading="lazy" />
+                <img
+                  src={ROBOT_HANDOFF_IMG}
+                  alt="Futuristic assistant robot taking the phone from a contractor on the job so inbound calls are still answered"
+                  className="w-full h-full object-cover object-center"
+                  loading="lazy"
+                />
               </div>
               {/* Floating status badge (micro-interaction) */}
               <div className="absolute -bottom-5 -left-4 bg-white rounded-xl shadow-xl p-4 border border-gray-100 flex items-center gap-3">
@@ -363,8 +371,8 @@ export default function Home() {
                   <Bot size={20} style={{ color: ORANGE }} />
                 </div>
                 <div>
-                  <div style={{ fontFamily: "'Sora',sans-serif", fontWeight: 700, fontSize: "0.8rem", color: "#0F172A" }}>AI Assistant Active</div>
-                  <div style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "0.72rem", color: "#64748B" }}>Answering calls 24/7</div>
+                  <div style={{ fontFamily: "'Sora',sans-serif", fontWeight: 700, fontSize: "0.8rem", color: "#0F172A" }}>Robot on your line</div>
+                  <div style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "0.72rem", color: "#64748B" }}>Taking the phone so you can work</div>
                 </div>
                 <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse ml-1 flex-shrink-0" />
               </div>
