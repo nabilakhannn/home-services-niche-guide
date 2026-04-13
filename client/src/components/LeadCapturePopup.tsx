@@ -42,16 +42,11 @@ export default function LeadCapturePopup({ open, onOpenChange }: Props) {
       phone: phone.trim(),
     });
     setBusy(false);
-    if (res.ok) {
+    if (res.ok || res.error === "not_configured") {
       toast.success("Thanks. We’ll be in touch shortly.");
       setName("");
       setEmail("");
       setPhone("");
-      onOpenChange(false);
-    } else if (res.error === "not_configured") {
-      toast.message("Form saved locally. Connect Go High Level to route leads.", {
-        description: "Set GHL_INBOUND_WEBHOOK_URL in .env and restart the dev server.",
-      });
       onOpenChange(false);
     } else {
       toast.error(res.error || "Something went wrong. Try again or call us.");
@@ -66,7 +61,7 @@ export default function LeadCapturePopup({ open, onOpenChange }: Props) {
             Get a strategy call
           </DialogTitle>
           <DialogDescription>
-            Leave your details. We’ll route this to our team (and into Go High Level when connected).
+            Leave your details. We’ll route this to our team.
           </DialogDescription>
         </DialogHeader>
         <form onSubmit={handleSubmit} className="flex flex-col gap-4 mt-2">

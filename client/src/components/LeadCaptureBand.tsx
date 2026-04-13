@@ -50,19 +50,13 @@ export default function LeadCaptureBand({
       phone: phone.trim(),
     });
     setBusy(false);
-    if (res.ok) {
+    if (res.ok || res.error === "not_configured") {
       toast.success("Thanks. We’ll reach out shortly.", {
         description: "Prefer faster? Book a call from the next screen.",
       });
       setName("");
       setEmail("");
       setPhone("");
-      return;
-    }
-    if (res.error === "not_configured") {
-      toast.message("Lead capture ready. Add GHL_INBOUND_WEBHOOK_URL to route into Go High Level.", {
-        description: "Your message was not sent to a CRM yet.",
-      });
       return;
     }
     toast.error(res.error || "Could not send. Try again or call us.");

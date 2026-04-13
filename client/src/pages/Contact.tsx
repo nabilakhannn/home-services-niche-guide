@@ -100,14 +100,7 @@ export default function Contact() {
       smsConsent: form.smsConsent,
     });
     setLoading(false);
-    if (res.ok) {
-      setSubmitted(true);
-      return;
-    }
-    if (res.error === "not_configured") {
-      toast.message("Form is ready. Add your Go High Level webhook URL to the server env to sync contacts.", {
-        duration: 6000,
-      });
+    if (res.ok || res.error === "not_configured") {
       setSubmitted(true);
       return;
     }

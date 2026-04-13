@@ -1,6 +1,6 @@
 import type { IncomingMessage } from "node:http";
 import type { Plugin } from "vite";
-import { buildGhlPayload, forwardToGhl, parseLeadBody } from "./leadApi";
+import { buildGhlPayload, forwardToGhl, parseLeadBody } from "../lib/leadApi";
 
 function readBody(req: IncomingMessage): Promise<string> {
   return new Promise((resolve, reject) => {

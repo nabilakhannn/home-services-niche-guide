@@ -185,7 +185,7 @@ export default function HvacDualRealityShowcase() {
                   className="text-xs font-bold uppercase tracking-[0.16em]"
                   style={{ color: ORANGE, fontFamily: "'DM Sans',sans-serif" }}
                 >
-                  Services for this job
+                  HVAC
                 </p>
                 <h3
                   className="mt-2 text-lg font-extrabold text-slate-900"

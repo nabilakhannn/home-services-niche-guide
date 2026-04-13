@@ -189,12 +189,6 @@ export default function Services() {
                       >
                         {s.title}
                       </p>
-                      <p
-                        className="mt-1 text-xs font-medium text-white/85 sm:text-sm"
-                        style={{ fontFamily: "'DM Sans',sans-serif" }}
-                      >
-                        Included in every plan
-                      </p>
                     </div>
                   </div>
                 </div>

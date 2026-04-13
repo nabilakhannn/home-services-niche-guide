@@ -3,7 +3,7 @@ import express from "express";
 import { createServer } from "http";
 import path from "path";
 import { fileURLToPath } from "url";
-import { buildGhlPayload, forwardToGhl, parseLeadBody } from "./leadApi";
+import { buildGhlPayload, forwardToGhl, parseLeadBody } from "../lib/leadApi";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
