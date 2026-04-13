@@ -45,12 +45,12 @@ export default function TermsOfService() {
             <ul>
               <li>Replying <strong>STOP</strong> to any SMS message from us</li>
               <li>Contacting us at <a href="mailto:nabila@scalebuds.com" style={{ color: ORANGE }}>nabila@scalebuds.com</a></li>
-              <li>Calling us at (609) 977-1129</li>
+              <li>Using the contact form on our website</li>
             </ul>
             <p>After sending STOP, you will receive one final confirmation message. You will not receive further SMS messages unless you re-subscribe by texting <strong>START</strong>.</p>
 
             <h3>3.5 Help</h3>
-            <p>For assistance, reply <strong>HELP</strong> to any SMS message or contact us at <a href="mailto:nabila@scalebuds.com" style={{ color: ORANGE }}>nabila@scalebuds.com</a> or (609) 977-1129.</p>
+            <p>For assistance, reply <strong>HELP</strong> to any SMS message or contact us at <a href="mailto:nabila@scalebuds.com" style={{ color: ORANGE }}>nabila@scalebuds.com</a>.</p>
 
             <h3>3.6 Supported Carriers</h3>
             <p>Supported carriers include AT&T, T-Mobile, Verizon Wireless, Sprint, Boost Mobile, MetroPCS, U.S. Cellular, and other major U.S. carriers. Carriers are not liable for delayed or undelivered messages. Message delivery is not guaranteed.</p>
@@ -92,8 +92,7 @@ export default function TermsOfService() {
             <p>If you have any questions about these Terms of Service, please contact us:</p>
             <div className="contact-block">
               <p><strong>ScaleBuds Marketing</strong><br />
-              Email: <a href="mailto:nabila@scalebuds.com" style={{ color: ORANGE }}>nabila@scalebuds.com</a><br />
-              Phone: <a href="tel:+16099771129" style={{ color: ORANGE }}>(609) 977-1129</a></p>
+              Email: <a href="mailto:nabila@scalebuds.com" style={{ color: ORANGE }}>nabila@scalebuds.com</a></p>
             </div>
 
           </div>

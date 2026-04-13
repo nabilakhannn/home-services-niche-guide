@@ -49,7 +49,7 @@ export default function LeadCapturePopup({ open, onOpenChange }: Props) {
       setPhone("");
       onOpenChange(false);
     } else {
-      toast.error(res.error || "Something went wrong. Try again or call us.");
+      toast.error(res.error || "Something went wrong. Try again or email nabila@scalebuds.com.");
     }
   }
 

@@ -53,7 +53,7 @@ export const articles: Article[] = [
         heading: "Who ScaleBuds Marketing is for",
         paragraphs: [
           "ScaleBuds Marketing (scalebuds.com) focuses on home service and home improvement contractors in the United States: remodeling, HVAC, plumbing, roofing, electrical, and related trades. Services include AI-assisted phone answering, speed-to-lead automation, Google and Meta advertising, local SEO, and review generation. The goal is more booked jobs from the demand you already pay for, not vanity metrics.",
-          "For a strategy review, use the contact page or call (609) 977-1129. Always compare agencies on transparent reporting, trade experience, and how they measure success (booked estimates and revenue, not impressions alone).",
+          "For a strategy review, use the contact page or email nabila@scalebuds.com. Always compare agencies on transparent reporting, trade experience, and how they measure success (booked estimates and revenue, not impressions alone).",
         ],
       },
     ],

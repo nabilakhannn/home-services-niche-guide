@@ -45,7 +45,7 @@ export default function PrivacyPolicy() {
             <p><strong>Message Frequency:</strong> Message frequency varies based on your interaction with us.</p>
             <p><strong>Message and Data Rates:</strong> Standard message and data rates may apply depending on your mobile carrier and plan.</p>
             <p><strong>Opt-Out:</strong> You may opt out of SMS communications at any time by replying <strong>STOP</strong> to any text message from us. After opting out, you will receive one final confirmation message. To re-subscribe, text <strong>START</strong>.</p>
-            <p><strong>Help:</strong> For help or more information, reply <strong>HELP</strong> to any text message or contact us at <a href="mailto:nabila@scalebuds.com" style={{ color: ORANGE }}>nabila@scalebuds.com</a> or (609) 977-1129.</p>
+            <p><strong>Help:</strong> For help or more information, reply <strong>HELP</strong> to any text message or contact us at <a href="mailto:nabila@scalebuds.com" style={{ color: ORANGE }}>nabila@scalebuds.com</a>.</p>
             <p><strong>No Sharing of Phone Numbers:</strong> We will not share, sell, or rent your phone number to third parties for their marketing purposes. Your consent to receive SMS messages is not a condition of purchasing any product or service.</p>
             <p><strong>Supported Carriers:</strong> AT&T, T-Mobile, Verizon, Sprint, Boost Mobile, MetroPCS, U.S. Cellular, and other major carriers. Carriers are not liable for delayed or undelivered messages.</p>
 
@@ -101,8 +101,7 @@ export default function PrivacyPolicy() {
             <p>If you have any questions about this Privacy Policy or our data practices, please contact us:</p>
             <div className="contact-block">
               <p><strong>ScaleBuds Marketing</strong><br />
-              Email: <a href="mailto:nabila@scalebuds.com" style={{ color: ORANGE }}>nabila@scalebuds.com</a><br />
-              Phone: <a href="tel:+16099771129" style={{ color: ORANGE }}>(609) 977-1129</a></p>
+              Email: <a href="mailto:nabila@scalebuds.com" style={{ color: ORANGE }}>nabila@scalebuds.com</a></p>
             </div>
 
           </div>

@@ -13,7 +13,7 @@ import HvacDualRealityShowcase from "@/components/HvacDualRealityShowcase";
 import { usePageSeo } from "@/hooks/usePageSeo";
 import { articles } from "@/content/articles";
 import {
-  Phone, CheckCircle2, ArrowRight, Bot,
+  Mail, CheckCircle2, ArrowRight, Bot,
   ChevronDown, ChevronUp, Clock,
   Quote,
 } from "lucide-react";
@@ -241,10 +241,10 @@ export default function Home() {
                   Book Free Strategy Call <ArrowRight size={16} />
                 </button>
               </Link>
-              <a href="tel:+16099771129">
+              <a href="mailto:nabila@scalebuds.com">
                 <button className="flex items-center justify-center gap-2 text-sm font-semibold px-7 py-3.5 rounded-md w-full sm:w-auto transition-colors"
                   style={{ border: "1.5px solid rgba(255,255,255,0.25)", color: "#fff", fontFamily: "'Sora',sans-serif", background: "rgba(255,255,255,0.06)" }}>
-                  <Phone size={15} /> (609) 977-1129
+                  <Mail size={15} /> Email us
                 </button>
               </a>
             </div>
@@ -599,9 +599,9 @@ export default function Home() {
                 Book Free Strategy Call <ArrowRight size={16} />
               </button>
             </Link>
-            <a href="tel:+16099771129">
+            <a href="mailto:nabila@scalebuds.com">
               <button className="border-2 border-white/60 text-white font-semibold px-9 py-3.5 rounded-md hover:bg-white/10 transition-colors text-sm flex items-center gap-2 justify-center" style={{ fontFamily: "'Sora',sans-serif" }}>
-                <Phone size={16} /> Call (609) 977-1129
+                <Mail size={16} /> Email us
               </button>
             </a>
           </div>

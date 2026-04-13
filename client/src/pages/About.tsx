@@ -5,7 +5,7 @@ import Footer from "@/components/Footer";
 import { usePageSeo } from "@/hooks/usePageSeo";
 import JsonLdBreadcrumb from "@/components/JsonLdBreadcrumb";
 import type { Crumb } from "@/components/JsonLdBreadcrumb";
-import { ArrowRight, Phone, Target, Heart, Zap } from "lucide-react";
+import { ArrowRight, Mail, Target, Heart, Zap } from "lucide-react";
 
 const ORANGE = "#D4622A";
 const HERO_IMG = "https://d2xsxph8kpxj0f.cloudfront.net/310519663206244947/jt9SAM2mN4CpsewZpdVEXA/hero_final-Ntzfdq7xpqFKUpVcM3dcPJ.webp";
@@ -124,9 +124,9 @@ export default function About() {
                 Book Free Strategy Call <ArrowRight size={16} />
               </button>
             </Link>
-            <a href="tel:+16099771129">
+            <a href="mailto:nabila@scalebuds.com">
               <button className="border-2 border-white/60 text-white font-semibold px-9 py-3.5 rounded-md text-sm flex items-center gap-2 justify-center hover:bg-white/10 transition-colors" style={{ fontFamily: "'Sora',sans-serif" }}>
-                <Phone size={16} /> Call (609) 977-1129
+                <Mail size={16} /> Email us
               </button>
             </a>
           </div>

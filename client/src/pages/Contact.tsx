@@ -6,7 +6,7 @@ import JsonLdBreadcrumb from "@/components/JsonLdBreadcrumb";
 import type { Crumb } from "@/components/JsonLdBreadcrumb";
 import { SITE_ORIGIN } from "@/content/articles";
 import { usePageSeo } from "@/hooks/usePageSeo";
-import { Phone, Mail, Clock, CheckCircle2, ArrowRight } from "lucide-react";
+import { Mail, Clock, CheckCircle2, ArrowRight } from "lucide-react";
 import { toast } from "sonner";
 import { submitLead } from "@/lib/submitLead";
 
@@ -30,7 +30,7 @@ export default function Contact() {
   usePageSeo({
     title: "Contact ScaleBuds Marketing",
     description:
-      "Book a free strategy call or message ScaleBuds. Phone (609) 977-1129. Marketing for HVAC, plumbing, roofing, and home service contractors.",
+      "Book a free strategy call or message ScaleBuds. Marketing for HVAC, plumbing, roofing, and home service contractors.",
     path: "/contact",
   });
 
@@ -46,7 +46,6 @@ export default function Contact() {
         "@type": "Organization",
         name: "ScaleBuds Marketing",
         url: SITE_ORIGIN,
-        telephone: "+16099771129",
         email: "nabila@scalebuds.com",
       },
     };
@@ -104,7 +103,7 @@ export default function Contact() {
       setSubmitted(true);
       return;
     }
-    toast.error(res.error || "Submission failed. Please call or email us.");
+    toast.error(res.error || "Submission failed. Please email us or try again.");
   };
 
   return (
@@ -153,12 +152,6 @@ export default function Contact() {
               <div className="rounded-xl p-5 border border-gray-100" style={{ background: "#F8F7F5" }}>
                 <h3 style={{ fontFamily: "'Sora',sans-serif", fontWeight: 700, fontSize: "0.9rem", color: "#0F172A", marginBottom: "1rem" }}>Contact Us Directly</h3>
                 <div className="flex flex-col gap-3">
-                  <a href="tel:+16099771129" className="flex items-center gap-3 group">
-                    <div className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: "rgba(212,98,42,0.1)", color: ORANGE }}>
-                      <Phone size={16} />
-                    </div>
-                    <span style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "0.9rem", color: "#334155" }} className="group-hover:underline">(609) 977-1129</span>
-                  </a>
                   <a href="mailto:nabila@scalebuds.com" className="flex items-center gap-3 group">
                     <div className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: "rgba(212,98,42,0.1)", color: ORANGE }}>
                       <Mail size={16} />

@@ -4,7 +4,6 @@ import { Link, useLocation } from "wouter";
 import {
   Menu,
   X,
-  Phone,
   ChevronDown,
   Bot,
   Zap,
@@ -188,14 +187,6 @@ export default function Navbar() {
         </nav>
 
         <div className="hidden lg:flex items-center gap-3 shrink-0">
-          <a
-            href="tel:+16099771129"
-            className="flex items-center gap-2 text-sm font-medium text-slate-700 hover:text-[oklch(0.60_0.18_42)] transition-colors"
-            style={{ fontFamily: "'DM Sans', sans-serif" }}
-          >
-            <Phone size={15} />
-            (609) 977-1129
-          </a>
           <Link href="/contact">
             <button className="btn-orange text-sm">Free Strategy Call</button>
           </Link>
@@ -280,10 +271,6 @@ export default function Navbar() {
           >
             About
           </Link>
-          <a href="tel:+16099771129" className="flex items-center gap-2 text-base font-medium text-slate-700 py-2 px-2">
-            <Phone size={16} />
-            (609) 977-1129
-          </a>
           <Link href="/contact">
             <button className="btn-orange w-full justify-center mt-2">Free Strategy Call</button>
           </Link>

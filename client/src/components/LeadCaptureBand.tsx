@@ -59,7 +59,7 @@ export default function LeadCaptureBand({
       setPhone("");
       return;
     }
-    toast.error(res.error || "Could not send. Try again or call us.");
+    toast.error(res.error || "Could not send. Try again or email nabila@scalebuds.com.");
   }
 
   const isDark = variant === "dark";

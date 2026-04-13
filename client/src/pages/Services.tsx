@@ -5,7 +5,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import JsonLdBreadcrumb from "@/components/JsonLdBreadcrumb";
 import { usePageSeo } from "@/hooks/usePageSeo";
-import { ArrowRight, Bot, Search, TrendingUp, Facebook, Star, Zap, Phone, CheckCircle2 } from "lucide-react";
+import { ArrowRight, Bot, Search, TrendingUp, Facebook, Star, Zap, Mail, CheckCircle2 } from "lucide-react";
 import { SERVICE_NAV_ITEMS } from "@/content/serviceSections";
 
 const ORANGE = "#D4622A";
@@ -264,9 +264,9 @@ export default function Services() {
                 Book Free Strategy Call <ArrowRight size={16} />
               </button>
             </Link>
-            <a href="tel:+16099771129">
+            <a href="mailto:nabila@scalebuds.com">
               <button className="border-2 border-white/60 text-white font-semibold px-9 py-3.5 rounded-md text-sm flex items-center gap-2 justify-center hover:bg-white/10 transition-colors" style={{ fontFamily: "'Sora',sans-serif" }}>
-                <Phone size={16} /> Call (609) 977-1129
+                <Mail size={16} /> Email us
               </button>
             </a>
           </div>
