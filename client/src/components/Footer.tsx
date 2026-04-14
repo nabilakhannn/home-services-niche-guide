@@ -1,13 +1,8 @@
 // ScaleBuds Marketing: Footer
 // Design: Clean Authority (dark slate bg, burnt orange accents)
 import { Link } from "wouter";
-import { Mail, MapPin, Phone } from "lucide-react";
-import {
-  BUSINESS_ADDRESS_LINES,
-  BUSINESS_EMAIL,
-  BUSINESS_PHONE_DISPLAY,
-  businessPhoneHref,
-} from "@/config/businessContact";
+import { Mail, MapPin } from "lucide-react";
+import { BUSINESS_ADDRESS_LINES, BUSINESS_EMAIL } from "@/config/businessContact";
 
 const LOGO_URL = "/logo-scalebuds.png";
 
@@ -57,13 +52,6 @@ export default function Footer() {
                   ))}
                 </span>
               </div>
-              <a
-                href={businessPhoneHref()}
-                className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors no-underline"
-              >
-                <Phone size={14} style={{ color: "oklch(0.60 0.18 42)" }} />
-                {BUSINESS_PHONE_DISPLAY}
-              </a>
               <a
                 href={`mailto:${BUSINESS_EMAIL}`}
                 className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors no-underline"

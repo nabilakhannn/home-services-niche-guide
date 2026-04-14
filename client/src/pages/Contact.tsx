@@ -6,14 +6,9 @@ import Footer from "@/components/Footer";
 import JsonLdBreadcrumb from "@/components/JsonLdBreadcrumb";
 import type { Crumb } from "@/components/JsonLdBreadcrumb";
 import { SITE_ORIGIN } from "@/content/articles";
-import {
-  BUSINESS_ADDRESS_LINES,
-  BUSINESS_EMAIL,
-  BUSINESS_PHONE_DISPLAY,
-  businessPhoneHref,
-} from "@/config/businessContact";
+import { BUSINESS_ADDRESS_LINES, BUSINESS_EMAIL } from "@/config/businessContact";
 import { usePageSeo } from "@/hooks/usePageSeo";
-import { Mail, Clock, CheckCircle2, ArrowRight, MapPin, Phone } from "lucide-react";
+import { Mail, Clock, CheckCircle2, ArrowRight, MapPin } from "lucide-react";
 import { toast } from "sonner";
 import { submitLead } from "@/lib/submitLead";
 
@@ -54,7 +49,6 @@ export default function Contact() {
         name: "ScaleBuds Marketing",
         url: SITE_ORIGIN,
         email: BUSINESS_EMAIL,
-        telephone: BUSINESS_PHONE_DISPLAY,
         address: {
           "@type": "PostalAddress",
           addressCountry: "US",
@@ -177,14 +171,6 @@ export default function Contact() {
                       ))}
                     </span>
                   </div>
-                  <a href={businessPhoneHref()} className="flex items-center gap-3 group">
-                    <div className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: "rgba(212,98,42,0.1)", color: ORANGE }}>
-                      <Phone size={16} />
-                    </div>
-                    <span style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "0.9rem", color: "#334155" }} className="group-hover:underline">
-                      {BUSINESS_PHONE_DISPLAY}
-                    </span>
-                  </a>
                   <a href={`mailto:${BUSINESS_EMAIL}`} className="flex items-center gap-3 group">
                     <div className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: "rgba(212,98,42,0.1)", color: ORANGE }}>
                       <Mail size={16} />

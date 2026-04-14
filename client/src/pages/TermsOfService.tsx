@@ -1,12 +1,7 @@
 // ScaleBuds Marketing: Terms of Service (SMS / chat widget disclosure)
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import {
-  BUSINESS_ADDRESS_LINES,
-  BUSINESS_EMAIL,
-  BUSINESS_PHONE_DISPLAY,
-  businessPhoneHref,
-} from "@/config/businessContact";
+import { BUSINESS_ADDRESS_LINES, BUSINESS_EMAIL } from "@/config/businessContact";
 
 const ORANGE = "#D4622A";
 const LAST_UPDATED = "April 14, 2026";
@@ -107,8 +102,6 @@ export default function TermsOfService() {
                     <br />
                   </span>
                 ))}
-                Phone: <a href={businessPhoneHref()} style={{ color: ORANGE }}>{BUSINESS_PHONE_DISPLAY}</a>
-                <br />
                 Email: <a href={`mailto:${BUSINESS_EMAIL}`} style={{ color: ORANGE }}>{BUSINESS_EMAIL}</a>
               </p>
             </div>
