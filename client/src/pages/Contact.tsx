@@ -71,7 +71,7 @@ export default function Contact() {
   }, []);
 
   const [form, setForm] = useState({
-    firstName: "", lastName: "", email: "", phone: "",
+    firstName: "", lastName: "", email: "",
     businessName: "", niche: "", service: "", message: "",
     acceptedPolicies: false,
   });
@@ -98,7 +98,6 @@ export default function Contact() {
       firstName: form.firstName,
       lastName: form.lastName,
       email: form.email,
-      phone: form.phone.trim() || undefined,
       companyName: form.businessName,
       niche: form.niche,
       service: form.service,
@@ -198,7 +197,7 @@ export default function Contact() {
                     You're on the Calendar!
                   </h2>
                   <p style={{ fontFamily: "'DM Sans',sans-serif", color: "#64748B", lineHeight: 1.75 }}>
-                    We'll reach out within 1 business hour to confirm your strategy call. Check your email and phone for a message from ScaleBuds Marketing.
+                    We'll reach out within 1 business hour to confirm your strategy call. Check your email for a message from ScaleBuds Marketing.
                   </p>
                 </div>
               ) : (
@@ -213,15 +212,9 @@ export default function Contact() {
                       <input name="lastName" required value={form.lastName} onChange={handleChange} className="form-input" placeholder="Smith" />
                     </div>
                   </div>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <label className="form-label">Email Address *</label>
-                      <input name="email" type="email" required value={form.email} onChange={handleChange} className="form-input" placeholder="john@example.com" />
-                    </div>
-                    <div>
-                      <label className="form-label">Phone (optional)</label>
-                      <input name="phone" type="tel" value={form.phone} onChange={handleChange} className="form-input" placeholder="Best number to reach you for your strategy call" autoComplete="tel" />
-                    </div>
+                  <div>
+                    <label className="form-label">Email Address *</label>
+                    <input name="email" type="email" required value={form.email} onChange={handleChange} className="form-input" placeholder="john@example.com" autoComplete="email" />
                   </div>
                   <div>
                     <label className="form-label">Business Name *</label>
@@ -264,7 +257,7 @@ export default function Contact() {
                         <Link href="/privacy-policy" style={{ color: ORANGE, textDecoration: "underline" }}>Privacy Policy</Link>{" "}
                         and{" "}
                         <Link href="/terms-of-service" style={{ color: ORANGE, textDecoration: "underline" }}>Terms of Service</Link>
-                        . I request follow-up about this inquiry by email or phone call. For SMS support messages, use the website chat widget and provide your mobile number there (separate consent in that tool).
+                        . I request follow-up about this inquiry by email. For SMS, use the website chat widget and provide your mobile number there (separate consent in that tool).
                       </span>
                     </label>
                   </div>

@@ -31,7 +31,7 @@ export default function TermsOfService() {
 
             <h2>3. SMS Messaging Terms</h2>
             <p>
-              If you provide a mobile number and opt in to SMS (for example through our website chat widget), you agree to the following terms. Our main contact form does not, by itself, enroll you in SMS marketing; follow-up for that form is by email or voice call unless you separately opt in through the chat tool or another disclosed program.
+              If you provide a mobile number and opt in to SMS (for example through our website chat widget), you agree to the following terms. Our main contact form does not collect a phone number and does not, by itself, enroll you in SMS marketing; follow-up for that form is by email unless you separately opt in through the chat tool or another disclosed program.
             </p>
 
             <h3>3.1 Program Description</h3>

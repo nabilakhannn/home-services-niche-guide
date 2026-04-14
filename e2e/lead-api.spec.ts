@@ -22,7 +22,6 @@ test.describe("Lead API / Go High Level forwarder", () => {
         formId: "e2e-playwright",
         email: "lead-e2e@example.com",
         firstName: "Playwright",
-        phone: "+15555550100",
       },
     });
     const body = (await res.json()) as { ok?: boolean; error?: string };

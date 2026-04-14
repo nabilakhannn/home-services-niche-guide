@@ -30,7 +30,7 @@ export default function PrivacyPolicy() {
             <h2>2. Information We Collect</h2>
             <p>We collect the following categories of personal information:</p>
             <ul>
-              <li><strong>Contact Information:</strong> Name, email address, phone number, business name</li>
+              <li><strong>Contact Information:</strong> Name, email address, business name (our website forms do not ask for a phone number; you may provide a mobile number only in our embedded chat widget if you choose)</li>
               <li><strong>Business Information:</strong> Trade/niche, service interests, business details you provide</li>
               <li><strong>Usage Data:</strong> IP address, browser type, pages visited, time spent on pages</li>
               <li><strong>Communications:</strong> Messages, emails, and call recordings (with consent)</li>
@@ -38,7 +38,7 @@ export default function PrivacyPolicy() {
 
             <h2>3. SMS / Text Message Communications</h2>
             <p>
-              <strong>Website contact form:</strong> Our strategy-call form collects your name, email, and optional phone number so we can respond to your inquiry by email or voice call. It does <strong>not</strong> add you to a separate SMS marketing program by checkbox on that form.
+              <strong>Website contact form:</strong> Our strategy-call form collects your name, email, and related business details so we can respond by email. It does <strong>not</strong> collect a phone number and does <strong>not</strong> add you to SMS marketing by a checkbox on that form.
             </p>
             <p>
               <strong>Website chat widget:</strong> If you start a conversation in our embedded chat and voluntarily provide a mobile number, you may receive customer-care or follow-up SMS in line with the consent and disclosures presented in that chat experience (including how to opt out).
