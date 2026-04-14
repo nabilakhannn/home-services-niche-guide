@@ -47,7 +47,7 @@ function parseLeadBody(raw: unknown): LeadSubmission {
 
 function buildGhlPayload(
   lead: LeadSubmission,
-  options?: { pipelineId?: string }
+  options?: { pipelineId?: string; locationId?: string }
 ) {
   const name =
     lead.fullName?.trim() ||
@@ -55,11 +55,13 @@ function buildGhlPayload(
     undefined;
 
   const pipelineId = options?.pipelineId?.trim();
+  const locationId = options?.locationId?.trim();
 
   return {
     formId: lead.formId,
     submittedAt: new Date().toISOString(),
     ...(pipelineId ? { ghlPipelineId: pipelineId } : {}),
+    ...(locationId ? { ghlLocationId: locationId } : {}),
     fullName: name,
     firstName: lead.firstName,
     lastName: lead.lastName,
@@ -133,6 +135,7 @@ export default async function handler(req: Req, res: Res) {
   try {
     const payload = buildGhlPayload(lead, {
       pipelineId: process.env.GHL_PIPELINE_ID,
+      locationId: process.env.GHL_LOCATION_ID,
     });
     const upstream = await forwardToGhl(webhookUrl, payload);
     if (!upstream.ok) {

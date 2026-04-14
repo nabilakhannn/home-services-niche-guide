@@ -155,6 +155,7 @@ export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, PROJECT_ROOT, "");
   const ghlWebhook = env.GHL_INBOUND_WEBHOOK_URL;
   const ghlPipelineId = env.GHL_PIPELINE_ID;
+  const ghlLocationId = env.GHL_LOCATION_ID;
 
   const plugins = [
     react(),
@@ -162,7 +163,11 @@ export default defineConfig(({ mode }) => {
     jsxLocPlugin(),
     vitePluginManusRuntime(),
     vitePluginManusDebugCollector(),
-    vitePluginSubmitLead(ghlWebhook || undefined, ghlPipelineId || undefined),
+    vitePluginSubmitLead(
+      ghlWebhook || undefined,
+      ghlPipelineId || undefined,
+      ghlLocationId || undefined
+    ),
   ];
 
   return {

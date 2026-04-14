@@ -14,7 +14,8 @@ function readBody(req: IncomingMessage): Promise<string> {
 /** Dev-only: same behavior as production POST /api/submit-lead */
 export function vitePluginSubmitLead(
   webhookUrl: string | undefined,
-  pipelineId?: string
+  pipelineId?: string,
+  locationId?: string
 ): Plugin {
   return {
     name: "submit-lead-api",
@@ -53,7 +54,7 @@ export function vitePluginSubmitLead(
         }
 
         try {
-          const payload = buildGhlPayload(lead, { pipelineId });
+          const payload = buildGhlPayload(lead, { pipelineId, locationId });
           const upstream = await forwardToGhl(webhookUrl, payload);
           if (!upstream.ok) {
             const t = await upstream.text().catch(() => "");

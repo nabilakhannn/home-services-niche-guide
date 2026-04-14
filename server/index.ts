@@ -34,6 +34,7 @@ async function startServer() {
     try {
       const payload = buildGhlPayload(lead, {
         pipelineId: process.env.GHL_PIPELINE_ID,
+        locationId: process.env.GHL_LOCATION_ID,
       });
       const upstream = await forwardToGhl(webhookUrl, payload);
       if (!upstream.ok) {

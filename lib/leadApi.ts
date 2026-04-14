@@ -47,6 +47,8 @@ export function parseLeadBody(raw: unknown): LeadSubmission {
 export type GhlPayloadOptions = {
   /** GHL pipeline id (e.g. `pit-…`) for workflow routing; optional. */
   pipelineId?: string;
+  /** GHL Location ID — sent as `ghlLocationId` for workflow / mapping; optional. */
+  locationId?: string;
 };
 
 /** Flat + nested keys so GHL mapping stays flexible */
@@ -57,11 +59,13 @@ export function buildGhlPayload(lead: LeadSubmission, options?: GhlPayloadOption
     undefined;
 
   const pipelineId = options?.pipelineId?.trim();
+  const locationId = options?.locationId?.trim();
 
   return {
     formId: lead.formId,
     submittedAt: new Date().toISOString(),
     ...(pipelineId ? { ghlPipelineId: pipelineId } : {}),
+    ...(locationId ? { ghlLocationId: locationId } : {}),
     fullName: name,
     firstName: lead.firstName,
     lastName: lead.lastName,
