@@ -184,6 +184,38 @@ export default function Home() {
         <div className="absolute inset-0 z-0">
           <img src={HERO_IMG} alt="Home services contractor with smartphone" className="w-full h-full object-cover object-center" loading="eager" />
           <div className="absolute inset-0" style={{ background: "linear-gradient(100deg, rgba(15,23,42,0.92) 0%, rgba(15,23,42,0.72) 45%, rgba(15,23,42,0.15) 100%)" }} />
+          {/* On-photo shirt branding (hero asset is stock; overlay replaces any non–ScaleBuds mark) */}
+          <div
+            className="absolute z-[5] pointer-events-none select-none"
+            style={{
+              right: "clamp(3%, 8vw, 14%)",
+              bottom: "clamp(14%, 20vh, 30%)",
+              transform: "rotate(-4deg)",
+            }}
+            aria-hidden
+          >
+            <div
+              className="rounded-md px-2.5 py-1.5 sm:px-3 sm:py-2 shadow-xl"
+              style={{
+                background: "linear-gradient(145deg, rgba(15,23,42,0.94) 0%, rgba(30,41,59,0.9) 100%)",
+                border: "1px solid rgba(255,255,255,0.3)",
+                boxShadow: "0 10px 28px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.12)",
+              }}
+            >
+              <span
+                style={{
+                  fontFamily: "'Sora', sans-serif",
+                  fontWeight: 800,
+                  fontSize: "clamp(0.75rem, 2.2vw, 1.2rem)",
+                  color: "#FFFFFF",
+                  letterSpacing: "-0.03em",
+                  lineHeight: 1,
+                }}
+              >
+                Scale<span style={{ color: ORANGE }}>Buds</span>
+              </span>
+            </div>
+          </div>
         </div>
 
         <div className="container relative z-10 py-24">

@@ -39,7 +39,7 @@ export const articles: Article[] = [
         heading: "What “best” usually means for home improvement",
         paragraphs: [
           "Home improvement and remodeling companies win when they combine visibility (being found), trust (reviews and portfolio), and response (answering and booking fast). The best marketing mix is rarely one channel. It is a small set of services that cover search, social proof, and phone conversion.",
-          "If you only buy leads but miss calls, you waste spend. If you only run SEO but never ask for reviews, you lose clicks. If you only post on social but ignore Google Maps, you miss high-intent local demand.",
+          "If paid lead flow reaches you but you still miss calls, you waste spend. If you only run SEO but never ask for reviews, you lose clicks. If you only post on social but ignore Google Maps, you miss high-intent local demand.",
         ],
       },
       {
@@ -92,7 +92,7 @@ export const articles: Article[] = [
         heading: "Questions HVAC owners ask",
         paragraphs: [
           "How much should an HVAC company spend on marketing? It depends on market and margin, but many growing contractors allocate a meaningful share of revenue to acquisition while unit economics stay positive.",
-          "What is the biggest mistake? Buying leads without a system to answer, book, and follow up. Fix the phone and SMS workflow before you scale spend.",
+          "What is the biggest mistake? Paying for lead generation without a system to answer, book, and follow up. Fix the phone and SMS workflow before you scale spend.",
         ],
       },
     ],

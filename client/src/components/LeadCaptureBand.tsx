@@ -23,7 +23,6 @@ export default function LeadCaptureBand({
 }: Props) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
   const [busy, setBusy] = useState(false);
 
   async function submit(e: FormEvent) {
@@ -47,7 +46,6 @@ export default function LeadCaptureBand({
       firstName,
       lastName,
       email: em,
-      phone: phone.trim(),
     });
     setBusy(false);
     if (res.ok || res.error === "not_configured") {
@@ -56,7 +54,6 @@ export default function LeadCaptureBand({
       });
       setName("");
       setEmail("");
-      setPhone("");
       return;
     }
     toast.error(res.error || "Could not send. Try again or email nabila@scalebuds.com.");
@@ -140,20 +137,9 @@ export default function LeadCaptureBand({
               />
             </div>
           </div>
-          <div className="mb-6">
-            <label className="form-label" htmlFor={`lc-phone-${variant}`}>
-              Phone
-            </label>
-            <input
-              id={`lc-phone-${variant}`}
-              type="tel"
-              className="form-input"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-              placeholder="(555) 000-0000"
-              autoComplete="tel"
-            />
-          </div>
+          <p className="text-xs mb-6" style={{ fontFamily: "'DM Sans',sans-serif", color: isDark ? "#94A3B8" : "#64748B" }}>
+            Prefer SMS or a faster reply? Use the chat bubble on this page — we keep this form email-only so it does not conflict with chat opt-in.
+          </p>
           <div className="flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between">
             <button
               type="submit"

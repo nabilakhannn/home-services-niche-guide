@@ -1,9 +1,15 @@
-// ScaleBuds Marketing: Terms of Service (A2P 10DLC Compliant)
+// ScaleBuds Marketing: Terms of Service (SMS / chat widget disclosure)
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import {
+  BUSINESS_ADDRESS_LINES,
+  BUSINESS_EMAIL,
+  BUSINESS_PHONE_DISPLAY,
+  businessPhoneHref,
+} from "@/config/businessContact";
 
 const ORANGE = "#D4622A";
-const LAST_UPDATED = "April 10, 2026";
+const LAST_UPDATED = "April 14, 2026";
 
 export default function TermsOfService() {
   return (
@@ -29,7 +35,9 @@ export default function TermsOfService() {
             <p>ScaleBuds Marketing provides digital marketing services for home service contractors, including but not limited to: AI phone answering systems, Google Ads management, Local SEO, Facebook and Instagram advertising, review generation, and speed-to-lead automation.</p>
 
             <h2>3. SMS Messaging Terms</h2>
-            <p>By providing your phone number and consenting to receive SMS messages from ScaleBuds Marketing, you agree to the following terms:</p>
+            <p>
+              If you provide a mobile number and opt in to SMS (for example through our website chat widget), you agree to the following terms. Our main contact form does not, by itself, enroll you in SMS marketing; follow-up for that form is by email or voice call unless you separately opt in through the chat tool or another disclosed program.
+            </p>
 
             <h3>3.1 Program Description</h3>
             <p>ScaleBuds Marketing sends SMS messages for the following purposes: appointment confirmations, strategy call reminders, follow-up communications regarding your inquiry, and information about our marketing services.</p>
@@ -44,13 +52,12 @@ export default function TermsOfService() {
             <p>You may opt out of receiving SMS messages at any time by:</p>
             <ul>
               <li>Replying <strong>STOP</strong> to any SMS message from us</li>
-              <li>Contacting us at <a href="mailto:nabila@scalebuds.com" style={{ color: ORANGE }}>nabila@scalebuds.com</a></li>
-              <li>Using the contact form on our website</li>
+              <li>Contacting us at <a href={`mailto:${BUSINESS_EMAIL}`} style={{ color: ORANGE }}>{BUSINESS_EMAIL}</a></li>
             </ul>
             <p>After sending STOP, you will receive one final confirmation message. You will not receive further SMS messages unless you re-subscribe by texting <strong>START</strong>.</p>
 
             <h3>3.5 Help</h3>
-            <p>For assistance, reply <strong>HELP</strong> to any SMS message or contact us at <a href="mailto:nabila@scalebuds.com" style={{ color: ORANGE }}>nabila@scalebuds.com</a>.</p>
+            <p>For assistance, reply <strong>HELP</strong> to any SMS message or contact us at <a href={`mailto:${BUSINESS_EMAIL}`} style={{ color: ORANGE }}>{BUSINESS_EMAIL}</a>.</p>
 
             <h3>3.6 Supported Carriers</h3>
             <p>Supported carriers include AT&T, T-Mobile, Verizon Wireless, Sprint, Boost Mobile, MetroPCS, U.S. Cellular, and other major U.S. carriers. Carriers are not liable for delayed or undelivered messages. Message delivery is not guaranteed.</p>
@@ -91,8 +98,19 @@ export default function TermsOfService() {
             <h2>12. Contact Us</h2>
             <p>If you have any questions about these Terms of Service, please contact us:</p>
             <div className="contact-block">
-              <p><strong>ScaleBuds Marketing</strong><br />
-              Email: <a href="mailto:nabila@scalebuds.com" style={{ color: ORANGE }}>nabila@scalebuds.com</a></p>
+              <p>
+                <strong>ScaleBuds Marketing</strong>
+                <br />
+                {BUSINESS_ADDRESS_LINES.map((line) => (
+                  <span key={line}>
+                    {line}
+                    <br />
+                  </span>
+                ))}
+                Phone: <a href={businessPhoneHref()} style={{ color: ORANGE }}>{BUSINESS_PHONE_DISPLAY}</a>
+                <br />
+                Email: <a href={`mailto:${BUSINESS_EMAIL}`} style={{ color: ORANGE }}>{BUSINESS_EMAIL}</a>
+              </p>
             </div>
 
           </div>

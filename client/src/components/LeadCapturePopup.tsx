@@ -20,7 +20,6 @@ type Props = {
 export default function LeadCapturePopup({ open, onOpenChange }: Props) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
   const [busy, setBusy] = useState(false);
 
   async function handleSubmit(e: FormEvent) {
@@ -39,14 +38,12 @@ export default function LeadCapturePopup({ open, onOpenChange }: Props) {
       firstName,
       lastName,
       email: em,
-      phone: phone.trim(),
     });
     setBusy(false);
     if (res.ok || res.error === "not_configured") {
       toast.success("Thanks. We’ll be in touch shortly.");
       setName("");
       setEmail("");
-      setPhone("");
       onOpenChange(false);
     } else {
       toast.error(res.error || "Something went wrong. Try again or email nabila@scalebuds.com.");
@@ -93,20 +90,9 @@ export default function LeadCapturePopup({ open, onOpenChange }: Props) {
               required
             />
           </div>
-          <div>
-            <label className="form-label" htmlFor="popup-phone">
-              Phone
-            </label>
-            <input
-              id="popup-phone"
-              type="tel"
-              className="form-input"
-              value={phone}
-              onChange={(e) => setPhone(e.target.value)}
-              placeholder="(555) 000-0000"
-              autoComplete="tel"
-            />
-          </div>
+          <p className="text-xs text-slate-500" style={{ fontFamily: "'DM Sans',sans-serif" }}>
+            To share a mobile number for SMS, use the site chat widget — this form stays email-only.
+          </p>
           <button
             type="submit"
             disabled={busy}

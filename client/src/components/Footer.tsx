@@ -1,7 +1,13 @@
 // ScaleBuds Marketing: Footer
 // Design: Clean Authority (dark slate bg, burnt orange accents)
 import { Link } from "wouter";
-import { Mail } from "lucide-react";
+import { Mail, MapPin, Phone } from "lucide-react";
+import {
+  BUSINESS_ADDRESS_LINES,
+  BUSINESS_EMAIL,
+  BUSINESS_PHONE_DISPLAY,
+  businessPhoneHref,
+} from "@/config/businessContact";
 
 const LOGO_URL = "/logo-scalebuds.png";
 
@@ -40,10 +46,30 @@ export default function Footer() {
             <p className="text-sm leading-relaxed text-slate-400 mb-5">
               We help HVAC, plumbing, roofing, and home improvement contractors stop losing leads and start growing with AI-powered marketing that works 24/7.
             </p>
-            <div className="flex flex-col gap-2 text-sm">
-              <a href="mailto:nabila@scalebuds.com" className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors no-underline">
+            <div className="flex flex-col gap-3 text-sm">
+              <div className="flex items-start gap-2 text-slate-400">
+                <MapPin size={14} className="mt-0.5 shrink-0" style={{ color: "oklch(0.60 0.18 42)" }} />
+                <span style={{ lineHeight: 1.55 }}>
+                  {BUSINESS_ADDRESS_LINES.map((line) => (
+                    <span key={line} className="block">
+                      {line}
+                    </span>
+                  ))}
+                </span>
+              </div>
+              <a
+                href={businessPhoneHref()}
+                className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors no-underline"
+              >
+                <Phone size={14} style={{ color: "oklch(0.60 0.18 42)" }} />
+                {BUSINESS_PHONE_DISPLAY}
+              </a>
+              <a
+                href={`mailto:${BUSINESS_EMAIL}`}
+                className="flex items-center gap-2 text-slate-400 hover:text-white transition-colors no-underline"
+              >
                 <Mail size={14} style={{ color: "oklch(0.60 0.18 42)" }} />
-                nabila@scalebuds.com
+                {BUSINESS_EMAIL}
               </a>
             </div>
           </div>

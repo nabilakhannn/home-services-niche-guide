@@ -1,9 +1,15 @@
-// ScaleBuds Marketing: Privacy Policy (A2P 10DLC Compliant)
+// ScaleBuds Marketing: Privacy Policy (A2P / SMS + chat widget disclosure)
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import {
+  BUSINESS_ADDRESS_LINES,
+  BUSINESS_EMAIL,
+  BUSINESS_PHONE_DISPLAY,
+  businessPhoneHref,
+} from "@/config/businessContact";
 
 const ORANGE = "#D4622A";
-const LAST_UPDATED = "April 10, 2026";
+const LAST_UPDATED = "April 14, 2026";
 
 export default function PrivacyPolicy() {
   return (
@@ -36,16 +42,22 @@ export default function PrivacyPolicy() {
             </ul>
 
             <h2>3. SMS / Text Message Communications</h2>
-            <p>By providing your phone number and checking the consent box on our contact form, you expressly consent to receive SMS text messages and phone calls from ScaleBuds Marketing at the phone number you provided. This includes:</p>
+            <p>
+              <strong>Website contact form:</strong> Our strategy-call form collects your name, email, and optional phone number so we can respond to your inquiry by email or voice call. It does <strong>not</strong> add you to a separate SMS marketing program by checkbox on that form.
+            </p>
+            <p>
+              <strong>Website chat widget:</strong> If you start a conversation in our embedded chat and voluntarily provide a mobile number, you may receive customer-care or follow-up SMS in line with the consent and disclosures presented in that chat experience (including how to opt out).
+            </p>
+            <p>When you have opted in to SMS from us (for example through the chat widget), messages may include:</p>
             <ul>
               <li>Appointment confirmations and reminders</li>
               <li>Follow-up communications regarding your inquiry</li>
-              <li>Marketing messages about our services (if separately consented)</li>
+              <li>Service-related messages about your support request</li>
             </ul>
             <p><strong>Message Frequency:</strong> Message frequency varies based on your interaction with us.</p>
             <p><strong>Message and Data Rates:</strong> Standard message and data rates may apply depending on your mobile carrier and plan.</p>
             <p><strong>Opt-Out:</strong> You may opt out of SMS communications at any time by replying <strong>STOP</strong> to any text message from us. After opting out, you will receive one final confirmation message. To re-subscribe, text <strong>START</strong>.</p>
-            <p><strong>Help:</strong> For help or more information, reply <strong>HELP</strong> to any text message or contact us at <a href="mailto:nabila@scalebuds.com" style={{ color: ORANGE }}>nabila@scalebuds.com</a>.</p>
+            <p><strong>Help:</strong> For help or more information, reply <strong>HELP</strong> to any text message or contact us at <a href={`mailto:${BUSINESS_EMAIL}`} style={{ color: ORANGE }}>{BUSINESS_EMAIL}</a>.</p>
             <p><strong>No Sharing of Phone Numbers:</strong> We will not share, sell, or rent your phone number to third parties for their marketing purposes. Your consent to receive SMS messages is not a condition of purchasing any product or service.</p>
             <p><strong>Supported Carriers:</strong> AT&T, T-Mobile, Verizon, Sprint, Boost Mobile, MetroPCS, U.S. Cellular, and other major carriers. Carriers are not liable for delayed or undelivered messages.</p>
 
@@ -69,7 +81,7 @@ export default function PrivacyPolicy() {
             </ul>
 
             <h2>6. Data Retention</h2>
-            <p>We retain your personal information for as long as necessary to provide our services and comply with legal obligations. You may request deletion of your data at any time by contacting us at <a href="mailto:nabila@scalebuds.com" style={{ color: ORANGE }}>nabila@scalebuds.com</a>.</p>
+            <p>We retain your personal information for as long as necessary to provide our services and comply with legal obligations. You may request deletion of your data at any time by contacting us at <a href={`mailto:${BUSINESS_EMAIL}`} style={{ color: ORANGE }}>{BUSINESS_EMAIL}</a>.</p>
 
             <h2>7. Cookies and Tracking Technologies</h2>
             <p>Our website uses cookies and similar tracking technologies to improve your browsing experience, analyze site traffic, and understand where our visitors come from. You can control cookie settings through your browser preferences.</p>
@@ -83,7 +95,7 @@ export default function PrivacyPolicy() {
               <li>The right to opt out of marketing communications</li>
               <li>The right to data portability</li>
             </ul>
-            <p>To exercise any of these rights, contact us at <a href="mailto:nabila@scalebuds.com" style={{ color: ORANGE }}>nabila@scalebuds.com</a>.</p>
+            <p>To exercise any of these rights, contact us at <a href={`mailto:${BUSINESS_EMAIL}`} style={{ color: ORANGE }}>{BUSINESS_EMAIL}</a>.</p>
 
             <h2>9. Security</h2>
             <p>We implement industry-standard security measures to protect your personal information from unauthorized access, disclosure, alteration, or destruction. However, no method of transmission over the internet is 100% secure.</p>
@@ -100,8 +112,19 @@ export default function PrivacyPolicy() {
             <h2>13. Contact Us</h2>
             <p>If you have any questions about this Privacy Policy or our data practices, please contact us:</p>
             <div className="contact-block">
-              <p><strong>ScaleBuds Marketing</strong><br />
-              Email: <a href="mailto:nabila@scalebuds.com" style={{ color: ORANGE }}>nabila@scalebuds.com</a></p>
+              <p>
+                <strong>ScaleBuds Marketing</strong>
+                <br />
+                {BUSINESS_ADDRESS_LINES.map((line) => (
+                  <span key={line}>
+                    {line}
+                    <br />
+                  </span>
+                ))}
+                Phone: <a href={businessPhoneHref()} style={{ color: ORANGE }}>{BUSINESS_PHONE_DISPLAY}</a>
+                <br />
+                Email: <a href={`mailto:${BUSINESS_EMAIL}`} style={{ color: ORANGE }}>{BUSINESS_EMAIL}</a>
+              </p>
             </div>
 
           </div>

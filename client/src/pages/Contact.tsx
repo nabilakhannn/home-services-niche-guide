@@ -1,12 +1,19 @@
-// ScaleBuds Marketing: Contact Page (A2P 10DLC Compliant opt-in)
+// ScaleBuds Marketing: Contact Page (policies + callback; SMS opt-in via chat widget — GHL compliance)
 import { useState, useEffect } from "react";
+import { Link } from "wouter";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import JsonLdBreadcrumb from "@/components/JsonLdBreadcrumb";
 import type { Crumb } from "@/components/JsonLdBreadcrumb";
 import { SITE_ORIGIN } from "@/content/articles";
+import {
+  BUSINESS_ADDRESS_LINES,
+  BUSINESS_EMAIL,
+  BUSINESS_PHONE_DISPLAY,
+  businessPhoneHref,
+} from "@/config/businessContact";
 import { usePageSeo } from "@/hooks/usePageSeo";
-import { Mail, Clock, CheckCircle2, ArrowRight } from "lucide-react";
+import { Mail, Clock, CheckCircle2, ArrowRight, MapPin, Phone } from "lucide-react";
 import { toast } from "sonner";
 import { submitLead } from "@/lib/submitLead";
 
@@ -46,7 +53,13 @@ export default function Contact() {
         "@type": "Organization",
         name: "ScaleBuds Marketing",
         url: SITE_ORIGIN,
-        email: "nabila@scalebuds.com",
+        email: BUSINESS_EMAIL,
+        telephone: BUSINESS_PHONE_DISPLAY,
+        address: {
+          "@type": "PostalAddress",
+          addressCountry: "US",
+          streetAddress: BUSINESS_ADDRESS_LINES.slice(1).join(", ") || undefined,
+        },
       },
     };
     const id = "jsonld-contact-page";
@@ -66,7 +79,7 @@ export default function Contact() {
   const [form, setForm] = useState({
     firstName: "", lastName: "", email: "", phone: "",
     businessName: "", niche: "", service: "", message: "",
-    smsConsent: false,
+    acceptedPolicies: false,
   });
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -81,8 +94,8 @@ export default function Contact() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!form.smsConsent) {
-      toast.error("Please agree to receive communications to continue.");
+    if (!form.acceptedPolicies) {
+      toast.error("Please confirm you agree to our Privacy Policy and Terms of Service.");
       return;
     }
     setLoading(true);
@@ -91,12 +104,12 @@ export default function Contact() {
       firstName: form.firstName,
       lastName: form.lastName,
       email: form.email,
-      phone: form.phone,
+      phone: form.phone.trim() || undefined,
       companyName: form.businessName,
       niche: form.niche,
       service: form.service,
       message: form.message,
-      smsConsent: form.smsConsent,
+      smsConsent: false,
     });
     setLoading(false);
     if (res.ok || res.error === "not_configured") {
@@ -150,13 +163,33 @@ export default function Contact() {
               </div>
 
               <div className="rounded-xl p-5 border border-gray-100" style={{ background: "#F8F7F5" }}>
-                <h3 style={{ fontFamily: "'Sora',sans-serif", fontWeight: 700, fontSize: "0.9rem", color: "#0F172A", marginBottom: "1rem" }}>Contact Us Directly</h3>
+                <h3 style={{ fontFamily: "'Sora',sans-serif", fontWeight: 700, fontSize: "0.9rem", color: "#0F172A", marginBottom: "1rem" }}>Mailing & contact</h3>
                 <div className="flex flex-col gap-3">
-                  <a href="mailto:nabila@scalebuds.com" className="flex items-center gap-3 group">
+                  <div className="flex items-start gap-3">
+                    <div className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5" style={{ background: "rgba(212,98,42,0.1)", color: ORANGE }}>
+                      <MapPin size={16} />
+                    </div>
+                    <span style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "0.85rem", color: "#334155", lineHeight: 1.55 }}>
+                      {BUSINESS_ADDRESS_LINES.map((line) => (
+                        <span key={line} className="block">
+                          {line}
+                        </span>
+                      ))}
+                    </span>
+                  </div>
+                  <a href={businessPhoneHref()} className="flex items-center gap-3 group">
+                    <div className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: "rgba(212,98,42,0.1)", color: ORANGE }}>
+                      <Phone size={16} />
+                    </div>
+                    <span style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "0.9rem", color: "#334155" }} className="group-hover:underline">
+                      {BUSINESS_PHONE_DISPLAY}
+                    </span>
+                  </a>
+                  <a href={`mailto:${BUSINESS_EMAIL}`} className="flex items-center gap-3 group">
                     <div className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: "rgba(212,98,42,0.1)", color: ORANGE }}>
                       <Mail size={16} />
                     </div>
-                    <span style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "0.9rem", color: "#334155" }} className="group-hover:underline">nabila@scalebuds.com</span>
+                    <span style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "0.9rem", color: "#334155" }} className="group-hover:underline">{BUSINESS_EMAIL}</span>
                   </a>
                   <div className="flex items-center gap-3">
                     <div className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0" style={{ background: "rgba(212,98,42,0.1)", color: ORANGE }}>
@@ -200,8 +233,8 @@ export default function Contact() {
                       <input name="email" type="email" required value={form.email} onChange={handleChange} className="form-input" placeholder="john@example.com" />
                     </div>
                     <div>
-                      <label className="form-label">Phone Number *</label>
-                      <input name="phone" type="tel" required value={form.phone} onChange={handleChange} className="form-input" placeholder="(555) 000-0000" />
+                      <label className="form-label">Phone (optional)</label>
+                      <input name="phone" type="tel" value={form.phone} onChange={handleChange} className="form-input" placeholder="Best number to reach you for your strategy call" autoComplete="tel" />
                     </div>
                   </div>
                   <div>
@@ -229,23 +262,23 @@ export default function Contact() {
                     <textarea name="message" value={form.message} onChange={handleChange} className="form-input" rows={3} placeholder="How many calls do you get per week? What's your biggest marketing challenge?" style={{ resize: "vertical" }} />
                   </div>
 
-                  {/* A2P 10DLC Compliant SMS Consent */}
                   <div className="rounded-xl p-4 border border-gray-200" style={{ background: "#FAFAFA" }}>
                     <label className="flex items-start gap-3 cursor-pointer">
                       <input
                         type="checkbox"
-                        name="smsConsent"
-                        checked={form.smsConsent}
+                        name="acceptedPolicies"
+                        checked={form.acceptedPolicies}
                         onChange={handleChange}
                         className="mt-1 flex-shrink-0"
                         style={{ accentColor: ORANGE, width: "16px", height: "16px" }}
                         required
                       />
                       <span style={{ fontFamily: "'DM Sans',sans-serif", fontSize: "0.8rem", color: "#475569", lineHeight: 1.7 }}>
-                        By checking this box, I agree to receive SMS text messages and phone calls from ScaleBuds Marketing at the phone number provided. Message and data rates may apply. Message frequency varies. Reply <strong>STOP</strong> to opt out at any time. Reply <strong>HELP</strong> for help. Consent is not a condition of purchase. View our{" "}
-                        <a href="/privacy-policy" style={{ color: ORANGE, textDecoration: "underline" }}>Privacy Policy</a>{" "}
+                        I have read and agree to the{" "}
+                        <Link href="/privacy-policy" style={{ color: ORANGE, textDecoration: "underline" }}>Privacy Policy</Link>{" "}
                         and{" "}
-                        <a href="/terms-of-service" style={{ color: ORANGE, textDecoration: "underline" }}>Terms of Service</a>.
+                        <Link href="/terms-of-service" style={{ color: ORANGE, textDecoration: "underline" }}>Terms of Service</Link>
+                        . I request follow-up about this inquiry by email or phone call. For SMS support messages, use the website chat widget and provide your mobile number there (separate consent in that tool).
                       </span>
                     </label>
                   </div>
