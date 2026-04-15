@@ -1,0 +1,17 @@
+---
+description: GHL env vars and deploy for home-services-niche-guide
+alwaysApply: true
+---
+
+# Env (see `.env.example`)
+
+- `GHL_INBOUND_WEBHOOK_URL` — webhook receives `buildGhlPayload()` JSON from `POST /api/submit-lead`.
+- `GHL_PIPELINE_ID` — `pit-…` → payload key `ghlPipelineId`.
+- `GHL_LOCATION_ID` → payload key `ghlLocationId`.
+- `GHL_PRIVATE_INTEGRATION_TOKEN` — optional REST API only; never client-side.
+
+Align `api/submit-lead.ts` with `lib/leadApi.ts` when changing payload fields.
+
+# Deploy
+
+Vercel: set env vars on the project; build `pnpm run build` from this directory.
