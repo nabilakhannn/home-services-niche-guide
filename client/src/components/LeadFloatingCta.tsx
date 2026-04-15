@@ -11,6 +11,7 @@ export default function LeadFloatingCta() {
       <button
         type="button"
         onClick={() => setOpen(true)}
+        aria-label="Book a free strategy call"
         className="fixed bottom-[max(1.5rem,env(safe-area-inset-bottom,0px))] right-[max(1.5rem,env(safe-area-inset-right,0px))] z-40 flex items-center gap-2 rounded-full px-5 py-3.5 text-sm font-semibold text-white shadow-lg transition-transform hover:scale-[1.03] active:scale-[0.98] md:bottom-8 md:right-8"
         style={{
           fontFamily: "'Sora',sans-serif",
@@ -21,7 +22,7 @@ export default function LeadFloatingCta() {
         aria-expanded={open}
       >
         <MessageCircle size={20} strokeWidth={2.25} aria-hidden />
-        Get leads
+        Free strategy call
       </button>
       <LeadCapturePopup open={open} onOpenChange={setOpen} />
     </>
