@@ -51,7 +51,10 @@ export type GhlPayloadOptions = {
   locationId?: string;
 };
 
-/** Flat + nested keys so GHL mapping stays flexible */
+/**
+ * Flat JSON only — GHL Inbound Webhook triggers often reject nested objects / empty bodies.
+ * Root `locationId` + `pipelineId` match common workflow mappers; `ghl*` keys kept for compatibility.
+ */
 export function buildGhlPayload(lead: LeadSubmission, options?: GhlPayloadOptions) {
   const name =
     lead.fullName?.trim() ||
@@ -64,11 +67,12 @@ export function buildGhlPayload(lead: LeadSubmission, options?: GhlPayloadOption
   return {
     formId: lead.formId,
     submittedAt: new Date().toISOString(),
-    ...(pipelineId ? { ghlPipelineId: pipelineId } : {}),
-    ...(locationId ? { ghlLocationId: locationId } : {}),
-    fullName: name,
-    firstName: lead.firstName,
-    lastName: lead.lastName,
+    source: "scalebuds-website",
+    ...(pipelineId ? { ghlPipelineId: pipelineId, pipelineId } : {}),
+    ...(locationId ? { ghlLocationId: locationId, locationId } : {}),
+    fullName: name ?? "",
+    firstName: lead.firstName ?? "",
+    lastName: lead.lastName ?? "",
     email: lead.email,
     phone: lead.phone ?? "",
     companyName: lead.companyName ?? "",
@@ -77,22 +81,18 @@ export function buildGhlPayload(lead: LeadSubmission, options?: GhlPayloadOption
     message: lead.message ?? "",
     smsConsent: Boolean(lead.smsConsent),
     pageUrl: lead.pageUrl ?? "",
-    contact: {
-      name: name ?? "",
-      firstName: lead.firstName ?? "",
-      lastName: lead.lastName ?? "",
-      email: lead.email,
-      phone: lead.phone ?? "",
-      companyName: lead.companyName ?? "",
-    },
   };
 }
 
 export async function forwardToGhl(webhookUrl: string, payload: unknown): Promise<Response> {
+  const body = JSON.stringify(payload);
   const res = await fetch(webhookUrl, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(payload),
+    headers: {
+      "Content-Type": "application/json; charset=utf-8",
+      Accept: "application/json",
+    },
+    body,
   });
   return res;
 }

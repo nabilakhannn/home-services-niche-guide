@@ -60,11 +60,12 @@ function buildGhlPayload(
   return {
     formId: lead.formId,
     submittedAt: new Date().toISOString(),
-    ...(pipelineId ? { ghlPipelineId: pipelineId } : {}),
-    ...(locationId ? { ghlLocationId: locationId } : {}),
-    fullName: name,
-    firstName: lead.firstName,
-    lastName: lead.lastName,
+    source: "scalebuds-website",
+    ...(pipelineId ? { ghlPipelineId: pipelineId, pipelineId } : {}),
+    ...(locationId ? { ghlLocationId: locationId, locationId } : {}),
+    fullName: name ?? "",
+    firstName: lead.firstName ?? "",
+    lastName: lead.lastName ?? "",
     email: lead.email,
     phone: lead.phone ?? "",
     companyName: lead.companyName ?? "",
@@ -73,21 +74,16 @@ function buildGhlPayload(
     message: lead.message ?? "",
     smsConsent: Boolean(lead.smsConsent),
     pageUrl: lead.pageUrl ?? "",
-    contact: {
-      name: name ?? "",
-      firstName: lead.firstName ?? "",
-      lastName: lead.lastName ?? "",
-      email: lead.email,
-      phone: lead.phone ?? "",
-      companyName: lead.companyName ?? "",
-    },
   };
 }
 
 async function forwardToGhl(webhookUrl: string, payload: unknown): Promise<Response> {
   return fetch(webhookUrl, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json; charset=utf-8",
+      Accept: "application/json",
+    },
     body: JSON.stringify(payload),
   });
 }
