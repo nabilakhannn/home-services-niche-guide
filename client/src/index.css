@@ -309,3 +309,32 @@
     font-weight: 600;
   }
 }
+
+/* Home: industries marquee (Manus-style infinite ticker) */
+@keyframes industries-marquee {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-industries-marquee {
+  animation: industries-marquee 50s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-industries-marquee {
+    animation: none;
+    flex-wrap: wrap;
+    justify-content: center;
+    row-gap: 0.75rem;
+    width: 100% !important;
+    max-width: 56rem;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}

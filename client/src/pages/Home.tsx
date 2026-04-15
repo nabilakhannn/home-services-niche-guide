@@ -8,6 +8,7 @@ import { Link } from "wouter";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import LeadCaptureBand from "@/components/LeadCaptureBand";
+import IndustriesMarquee from "@/components/IndustriesMarquee";
 import MotionReveal from "@/components/MotionReveal";
 import HvacDualRealityShowcase from "@/components/HvacDualRealityShowcase";
 import { usePageSeo } from "@/hooks/usePageSeo";
@@ -48,7 +49,7 @@ function useInView(threshold = 0.12) {
 }
 
 // ── Animated counter ──
-function Counter({ end, suffix }: { end: number; suffix: string }) {
+function Counter({ end, suffix, prefix = "" }: { end: number; suffix: string; prefix?: string }) {
   const [val, setVal] = useState(0);
   const { ref, visible } = useInView(0.3);
   const ran = useRef(false);
@@ -64,7 +65,13 @@ function Counter({ end, suffix }: { end: number; suffix: string }) {
       else setVal(Math.floor(cur));
     }, dur / steps);
   }, [visible, end]);
-  return <span ref={ref}>{val}{suffix}</span>;
+  return (
+    <span ref={ref}>
+      {prefix}
+      {val}
+      {suffix}
+    </span>
+  );
 }
 
 // ── FAQ item ──
@@ -92,11 +99,11 @@ function FAQ({ q, a }: { q: string; a: string }) {
 }
 
 // ── Data ──
-const stats = [
-  { val: 62, suffix: "%", label: "of contractor calls go unanswered" },
-  { val: 85, suffix: "%", label: "of missed callers never call back" },
-  { val: 21, suffix: "×", label: "more conversions with 5-min response" },
-  { val: 189, suffix: "K", label: "avg annual revenue lost per contractor" },
+const stats: { val: number; suffix: string; label: string; prefix?: string }[] = [
+  { prefix: "$", val: 189, suffix: "K", label: "Lost per year from missed calls" },
+  { val: 62, suffix: "%", label: "Of calls go unanswered on job sites" },
+  { val: 5, suffix: " min", label: "Speed to lead increases close rate 100×" },
+  { val: 24, suffix: "/7", label: "AI answers every call, every day" },
 ];
 
 const niches = [
@@ -335,7 +342,7 @@ export default function Home() {
             {stats.map((s, i) => (
               <div key={i} className="text-center px-4">
                 <div style={{ fontFamily: "'Sora',sans-serif", fontWeight: 800, fontSize: "2.25rem", color: ORANGE, lineHeight: 1 }}>
-                  <Counter end={s.val} suffix={s.suffix} />
+                  <Counter end={s.val} suffix={s.suffix} prefix={s.prefix} />
                 </div>
                 <p className="mt-2 text-xs text-slate-400 leading-snug" style={{ fontFamily: "'DM Sans',sans-serif" }}>{s.label}</p>
               </div>
@@ -343,6 +350,8 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      <IndustriesMarquee />
 
       {/* ─────────────── PROBLEM / AI SECTION ─────────────── */}
       <section className="py-24 bg-white">
@@ -472,11 +481,14 @@ export default function Home() {
         >
           <div className="text-center max-w-2xl mx-auto mb-14">
             <div className="section-divider mx-auto" />
+            <p className="text-xs font-bold uppercase tracking-[0.2em] mb-2" style={{ fontFamily: "'DM Sans',sans-serif", color: ORANGE }}>
+              Who We Serve
+            </p>
             <h2 style={{ fontFamily: "'Sora',sans-serif", fontWeight: 800, fontSize: "clamp(1.7rem,2.8vw,2.4rem)", color: "#0F172A", lineHeight: 1.2, marginBottom: "1rem" }}>
               Built for the Trades That Can't Afford to Miss a Call
             </h2>
             <p style={{ fontFamily: "'DM Sans',sans-serif", color: "#64748B", lineHeight: 1.75 }}>
-              We specialize exclusively in home services. We know your seasonality, your margins, and exactly what it takes to get your phone ringing every day.
+              Built for home service contractors — HVAC, plumbing, roofing, electrical, and more. We know your seasonality, your margins, and what it takes to keep your phone ringing.
             </p>
           </div>
 
