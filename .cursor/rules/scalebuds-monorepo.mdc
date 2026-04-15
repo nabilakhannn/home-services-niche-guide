@@ -8,7 +8,7 @@ alwaysApply: true
 - **Stack:** Vite + React 19 + Wouter + Tailwind v4; `client/src/`, `App.tsx` routes.
 - **API:** `POST /api/submit-lead` — `lib/leadApi.ts` builds JSON; `server/index.ts` (Node) or `api/submit-lead.ts` (Vercel). Dev: `vite-plugin-submit-lead` in `vite.config.ts`.
 - **GHL:** Env `GHL_INBOUND_WEBHOOK_URL`, `GHL_PIPELINE_ID`, `GHL_LOCATION_ID` — see repo root `.cursor/rules/ghl-vercel-env.mdc` and `.env.example`.
-- **Chat:** `client/index.html` — Lead Connector `data-widget-id`.
+- **Floating CTA:** `LeadFloatingCta.tsx` — sole site chat-style button (Lead Connector widget optional; not embedded by default).
 - **Floating CTA:** `client/src/components/LeadFloatingCta.tsx` — positioned above chat launcher.
 - **Build:** `pnpm run build`; Vercel `outputDirectory` `dist/public`, SPA rewrites in `vercel.json`.
 

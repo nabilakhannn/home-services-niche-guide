@@ -1,10 +1,10 @@
-// ScaleBuds Marketing: Privacy Policy (A2P / SMS + chat widget disclosure)
+// ScaleBuds Marketing: Privacy Policy (A2P / SMS disclosure)
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { BUSINESS_ADDRESS_LINES, BUSINESS_EMAIL } from "@/config/businessContact";
 
 const ORANGE = "#D4622A";
-const LAST_UPDATED = "April 14, 2026";
+const LAST_UPDATED = "April 15, 2026";
 
 export default function PrivacyPolicy() {
   return (
@@ -30,7 +30,7 @@ export default function PrivacyPolicy() {
             <h2>2. Information We Collect</h2>
             <p>We collect the following categories of personal information:</p>
             <ul>
-              <li><strong>Contact Information:</strong> Name, email address, business name (our website forms do not ask for a phone number; you may provide a mobile number only in our embedded chat widget if you choose)</li>
+              <li><strong>Contact Information:</strong> Name, email address, business name (our public website forms do not collect a phone number; you may share a phone number later if you choose, for example when scheduling a call or by email)</li>
               <li><strong>Business Information:</strong> Trade/niche, service interests, business details you provide</li>
               <li><strong>Usage Data:</strong> IP address, browser type, pages visited, time spent on pages</li>
               <li><strong>Communications:</strong> Messages, emails, and call recordings (with consent)</li>
@@ -41,9 +41,9 @@ export default function PrivacyPolicy() {
               <strong>Website contact form:</strong> Our strategy-call form collects your name, email, and related business details so we can respond by email. It does <strong>not</strong> collect a phone number and does <strong>not</strong> add you to SMS marketing by a checkbox on that form.
             </p>
             <p>
-              <strong>Website chat widget:</strong> If you start a conversation in our embedded chat and voluntarily provide a mobile number, you may receive customer-care or follow-up SMS in line with the consent and disclosures presented in that chat experience (including how to opt out).
+              <strong>Other SMS opt-in:</strong> If we offer SMS and you opt in through a separate, clearly disclosed program (for example a written agreement, a dedicated SMS signup, or consent captured on a call), we will send messages only according to that program’s terms.
             </p>
-            <p>When you have opted in to SMS from us (for example through the chat widget), messages may include:</p>
+            <p>When you have opted in to SMS from us through such a program, messages may include:</p>
             <ul>
               <li>Appointment confirmations and reminders</li>
               <li>Follow-up communications regarding your inquiry</li>

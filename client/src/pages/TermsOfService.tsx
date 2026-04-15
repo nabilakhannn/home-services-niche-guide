@@ -1,10 +1,10 @@
-// ScaleBuds Marketing: Terms of Service (SMS / chat widget disclosure)
+// ScaleBuds Marketing: Terms of Service (SMS disclosure)
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { BUSINESS_ADDRESS_LINES, BUSINESS_EMAIL } from "@/config/businessContact";
 
 const ORANGE = "#D4622A";
-const LAST_UPDATED = "April 14, 2026";
+const LAST_UPDATED = "April 15, 2026";
 
 export default function TermsOfService() {
   return (
@@ -31,7 +31,7 @@ export default function TermsOfService() {
 
             <h2>3. SMS Messaging Terms</h2>
             <p>
-              If you provide a mobile number and opt in to SMS (for example through our website chat widget), you agree to the following terms. Our main contact form does not collect a phone number and does not, by itself, enroll you in SMS marketing; follow-up for that form is by email unless you separately opt in through the chat tool or another disclosed program.
+              If you provide a mobile number and opt in to SMS through a separate, clearly disclosed program (for example a written agreement, a dedicated SMS signup, or consent captured when scheduling a call), you agree to the following terms. Our main website contact form does not collect a phone number and does not, by itself, enroll you in SMS marketing; follow-up for that form is by email unless you separately opt in through another disclosed program.
             </p>
 
             <h3>3.1 Program Description</h3>
