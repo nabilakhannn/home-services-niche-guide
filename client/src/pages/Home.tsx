@@ -297,6 +297,27 @@ export default function Home() {
         </div>
       </section>
 
+      {/* ─────────────── STATS BAR + INDUSTRIES (directly under hero) ─────────────── */}
+      <section style={{ backgroundColor: "#0F172A" }} className="py-14">
+        <div
+          ref={statsSection.ref}
+          className={`container transition-all duration-700 ${statsSection.visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
+        >
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 divide-x-0 md:divide-x divide-slate-700/50">
+            {stats.map((s, i) => (
+              <div key={i} className="text-center px-4">
+                <div style={{ fontFamily: "'Sora',sans-serif", fontWeight: 800, fontSize: "2.25rem", color: ORANGE, lineHeight: 1 }}>
+                  <Counter end={s.val} suffix={s.suffix} prefix={s.prefix} />
+                </div>
+                <p className="mt-2 text-xs text-slate-400 leading-snug" style={{ fontFamily: "'DM Sans',sans-serif" }}>{s.label}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <IndustriesMarquee />
+
       <HvacDualRealityShowcase />
 
       {/* Three pillars */}
@@ -331,27 +352,6 @@ export default function Home() {
         </div>
       </section>
       </MotionReveal>
-
-      {/* ─────────────── STATS BAR ─────────────── */}
-      <section style={{ backgroundColor: "#0F172A" }} className="py-14">
-        <div
-          ref={statsSection.ref}
-          className={`container transition-all duration-700 ${statsSection.visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}
-        >
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 divide-x-0 md:divide-x divide-slate-700/50">
-            {stats.map((s, i) => (
-              <div key={i} className="text-center px-4">
-                <div style={{ fontFamily: "'Sora',sans-serif", fontWeight: 800, fontSize: "2.25rem", color: ORANGE, lineHeight: 1 }}>
-                  <Counter end={s.val} suffix={s.suffix} prefix={s.prefix} />
-                </div>
-                <p className="mt-2 text-xs text-slate-400 leading-snug" style={{ fontFamily: "'DM Sans',sans-serif" }}>{s.label}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      <IndustriesMarquee />
 
       {/* ─────────────── PROBLEM / AI SECTION ─────────────── */}
       <section className="py-24 bg-white">
