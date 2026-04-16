@@ -1,15 +1,9 @@
 ---
-description: Primary app context — home-services-niche-guide (ScaleBuds Marketing site)
-alwaysApply: true
+description: See complete-handoff.mdc for full monorepo + app paths (this file kept for discoverability)
+alwaysApply: false
+globs: "**/*"
 ---
 
-# This folder = production ScaleBuds site
+# Pointer
 
-- **Stack:** Vite + React 19 + Wouter + Tailwind v4; `client/src/`, `App.tsx` routes.
-- **API:** `POST /api/submit-lead` — `lib/leadApi.ts` builds JSON; `server/index.ts` (Node) or `api/submit-lead.ts` (Vercel). Dev: `vite-plugin-submit-lead` in `vite.config.ts`.
-- **GHL:** Env `GHL_INBOUND_WEBHOOK_URL`, `GHL_PIPELINE_ID`, `GHL_LOCATION_ID` — see repo root `.cursor/rules/ghl-vercel-env.mdc` and `.env.example`.
-- **Floating CTA:** `LeadFloatingCta.tsx` — sole site chat-style button (Lead Connector widget optional; not embedded by default).
-- **Floating CTA:** `client/src/components/LeadFloatingCta.tsx` — positioned above chat launcher.
-- **Build:** `pnpm run build`; Vercel `outputDirectory` `dist/public`, SPA rewrites in `vercel.json`.
-
-Parent folder `HVAC_Marketing_Website/` may contain `scalebuds-site/` (separate app) and other tools—do not mix deploy targets.
+Authoritative Cursor context for this repo is **`.cursor/rules/complete-handoff.mdc`** (`alwaysApply: true`). Read that first; it includes stack, GHL, homepage behavior, legal, and deploy.

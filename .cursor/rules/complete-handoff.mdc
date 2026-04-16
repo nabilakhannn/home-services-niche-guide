@@ -1,0 +1,73 @@
+---
+description: Full ScaleBuds project context — stack, GHL, UI decisions, legal, deploy (do not omit when editing this repo)
+alwaysApply: true
+---
+
+# ScaleBuds Marketing — `home-services-niche-guide` (complete handoff)
+
+## Product & outputs
+- **Brand:** ScaleBuds Marketing — home services marketing (HVAC, plumbing, roofing, electrical, remodel, etc.).
+- **Live:** Vercel production alias [home-services-niche-guide.vercel.app](https://home-services-niche-guide.vercel.app); custom domain **scalebuds.com** when DNS points to the same Vercel project.
+- **GitHub:** `nabilakhannn/home-services-niche-guide`, branch `main`.
+
+## Stack (this app only)
+- **Vite 7** + **React 19** + **Wouter** + **Tailwind v4** — app root `client/src/`, entry `client/src/main.tsx`, routes `client/src/App.tsx`.
+- **SSR/static:** Express `server/index.ts` serves `dist/public` in Node; **Vercel** uses `vercel.json` (SPA rewrites excluding `/api/*`, `outputDirectory: dist/public`) + **`api/submit-lead.ts`** serverless for `POST /api/submit-lead`.
+- **Build:** `pnpm run build` — Vite → `dist/public`, esbuild bundles `server/index.ts` → `dist/index.js`, **`index.html` copied to `404.html`** for client-side routes.
+- **Dev:** Vite + `server/vite-plugin-submit-lead.ts` (mirrors submit-lead API); env from `.env` via `vite.config.ts` `loadEnv`.
+
+## GoHighLevel / Lead Connector (leads)
+- **Inbound webhook URL** (example; confirm in `.env.example` / Vercel):  
+  `https://services.leadconnectorhq.com/hooks/Pglkea64yintAtcVebhi/webhook-trigger/wcaMlNw5BRX1OZxwDxOX`
+- **Env (set in Vercel + local `.env`):**
+  - `GHL_INBOUND_WEBHOOK_URL` — full POST target for leads.
+  - `GHL_PIPELINE_ID` — `pit-9065baee-ac4a-43d5-883b-2744f85d6830` (pipeline id, **not** a Private Integration API token).
+  - `GHL_LOCATION_ID` — `Pglkea64yintAtcVebhi` (sent as `locationId` + `ghlLocationId` in JSON).
+  - Optional: `GHL_PRIVATE_INTEGRATION_TOKEN` — only for future server-side HighLevel REST scripts; never browser.
+- **Payload:** `lib/leadApi.ts` → **`buildGhlPayload()`** — **flat JSON only** (no nested `contact` object). Includes `source: "scalebuds-website"`, optional `pipelineId` / `locationId` / `ghlPipelineId` / `ghlLocationId`, plus `formId`, `email`, names, `phone`, `companyName`, `niche`, `service`, `message`, `smsConsent`, `pageUrl`, `submittedAt`.
+- **`api/submit-lead.ts`:** Duplicate of parse/build/forward logic — **must stay aligned** with `lib/leadApi.ts` when fields change (Vercel bundler).
+- **Forwarder:** `forwardToGhl()` — `POST`, `Content-Type: application/json; charset=utf-8`.
+- **Testing webhook:** Use **POST** with JSON. Opening the webhook URL in a **browser** (GET, no body) returns GHL “invalid body” — expected.
+- **Client:** `client/src/lib/submitLead.ts` → `POST /api/submit-lead`.
+
+## Chat widget vs single CTA (explicit decision)
+- **Lead Connector chat script is intentionally NOT embedded** in `client/index.html` (avoid competing with custom CTA). Comment in HTML explains re-adding from GHL CRM (`loader.js` + `data-widget-id`) if live chat is needed again.
+- **Single floating action:** `client/src/components/LeadFloatingCta.tsx` — orange pill **“Free strategy call”**, `aria-label="Book a free strategy call"`, opens **`LeadCapturePopup`** (email-only lead flow to same webhook). Position uses safe-area; no second widget to avoid overlap.
+
+## Homepage (`client/src/pages/Home.tsx`) — notable UI
+- **Hero image:** `HERO_IMG` CDN (CloudFront/Manus asset). Stock photo may show non–ScaleBuds shirt branding.
+- **Shirt fix:** Absolute **opaque ScaleBuds badge** over chest (large `rgba(11,18,32,0.98)` panel, **Scale** + orange **Buds**). **Responsive:** `max-sm` anchored `left-[4%]`; **`md+`** `md:right-[clamp(7%,11vw,20%)]` — covers typical “left chest” logo placement; tweak if crop changes.
+- **Hero** dark gradient overlay on image.
+- **Section order:** Hero → **stats bar** ($189K / 62% / 5 min / 24/7, `Counter` with optional `$` prefix) → **`IndustriesMarquee`** (“Industries We Serve” infinite ticker) → `HvacDualRealityShowcase` → three pillars → problem section → …
+- **`IndustriesMarquee`:** Ten trade labels; CSS **`animate-industries-marquee`** in `client/src/index.css` (`@keyframes industries-marquee`, `prefers-reduced-motion` wraps).
+- **LeadCaptureBand** on home: email-only; helper text points to contact page / email (no chat).
+
+## Forms & compliance copy
+- **`Contact.tsx`:** Strategy-call form; **email-first**; policies checkbox; **no** chat-widget SMS path in checkbox copy.
+- **`LeadCapturePopup` / `LeadCaptureBand`:** Email-only; no “use chat for SMS” lines.
+- **`client/src/config/businessContact.ts`:** Legal entity line, address, **email** for footer/legal.
+- **Privacy / Terms:** **Last updated April 15, 2026** — SMS only via **separate disclosed** opt-in (not main form); **no** embedded chat widget disclosure path.
+
+## Parent workspace (optional)
+- **`HVAC_Marketing_Website/`** may be Cursor workspace root; **`scalebuds-site/`** is a **separate** Wouter app (header phone removed in repo; do not assume same deploy as `home-services-niche-guide`).
+
+## Ops checklist
+- After env changes: **restart Vite** locally; **redeploy Vercel** after changing project env vars.
+- **E2E:** `e2e/lead-api.spec.ts` exercises `/api/submit-lead` (200 vs 503 if webhook unset).
+
+## More file map (navigation & content)
+- **Layout:** `client/src/components/Navbar.tsx`, `Footer.tsx`, `ScrollToTop.tsx`, `SkipLink.tsx`, `ErrorBoundary.tsx`.
+- **Pages:** `Home`, `Services`, `About`, `Contact`, `Resources`, `ArticlePage`, `PrivacyPolicy`, `TermsOfService`, `NotFound`.
+- **Content:** `client/src/content/articles.ts`, `serviceSections.ts`; SEO hook `client/src/hooks/usePageSeo.ts`.
+- **SEO / meta:** `client/index.html` — title, OG/Twitter, JSON-LD Organization/WebSite (email contactPoint; no public `tel:` in schema).
+- **Styling:** `client/src/index.css` — brand tokens, `.btn-orange`, marquee keyframes, form styles, prose for legal.
+
+## `scalebuds-site/` (sibling folder, separate app)
+- Not part of `home-services-niche-guide` Vercel deploy unless explicitly wired.
+- **Edits made:** `scalebuds-site/src/components/Navbar.tsx` — removed `tel:` and visible phone; `scalebuds-site/src/App.tsx` — contact description no longer includes phone number. **Do not reintroduce** business phone there if policy is site-wide email-only.
+
+## UX decisions already shipped
+- **One primary floating control:** GHL chat embed removed; only **LeadFloatingCta** (“Free strategy call”).
+- **Hero shirt:** CSS overlay masks stock “Peak” / third-party chest logo; replacing `HERO_IMG` with a custom photo is optional for pixel-perfect branding.
+- **Industries:** Manus-inspired **marquee** + **stats** row placed **immediately under hero** (before dual-reality showcase).
+- **GHL webhook body:** Flattened payload + `locationId` / `pipelineId` aliases after GHL “invalid body” on nested objects / GET tests.

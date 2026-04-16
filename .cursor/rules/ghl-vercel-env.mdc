@@ -1,17 +1,9 @@
 ---
-description: GHL env vars and deploy for home-services-niche-guide
-alwaysApply: true
+description: See complete-handoff.mdc for GHL env + Vercel deploy (this file kept for discoverability)
+alwaysApply: false
+globs: "**/*"
 ---
 
-# Env (see `.env.example`)
+# Pointer
 
-- `GHL_INBOUND_WEBHOOK_URL` — Lead Connector inbound webhook URL; receives `buildGhlPayload()` JSON from `POST /api/submit-lead`.
-- `GHL_PIPELINE_ID` — `pit-…` → payload key `ghlPipelineId`.
-- `GHL_LOCATION_ID` → payload key `ghlLocationId`.
-- `GHL_PRIVATE_INTEGRATION_TOKEN` — optional REST API only; never client-side.
-
-Align `api/submit-lead.ts` with `lib/leadApi.ts` when changing payload fields.
-
-# Deploy
-
-Vercel: set env vars on the project; build `pnpm run build` from this directory.
+**`.cursor/rules/complete-handoff.mdc`** documents `GHL_*` env vars, webhook URL shape, flat JSON payload, and Vercel settings.
