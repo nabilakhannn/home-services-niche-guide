@@ -16,4 +16,4 @@ If your Cursor workspace root is **`HVAC_Marketing_Website/`**, also read **`../
 - Leads: `lib/leadApi.ts`, `api/submit-lead.ts` (must match), `client/src/lib/submitLead.ts`
 - Floating CTA: `client/src/components/LeadFloatingCta.tsx`
 - Home: `client/src/pages/Home.tsx`, `client/src/components/IndustriesMarquee.tsx`, `client/src/index.css` (marquee animation)
-- No GHL chat script in `client/index.html` by design
+- GHL **chat** in `client/index.html` (`data-widget-id`); email forms + Privacy/Terms describe SMS via chat vs form

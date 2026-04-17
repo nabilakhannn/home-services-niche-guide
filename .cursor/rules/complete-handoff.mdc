@@ -30,9 +30,9 @@ alwaysApply: true
 - **Testing webhook:** Use **POST** with JSON. Opening the webhook URL in a **browser** (GET, no body) returns GHL “invalid body” — expected.
 - **Client:** `client/src/lib/submitLead.ts` → `POST /api/submit-lead`.
 
-## Chat widget vs single CTA (explicit decision)
-- **Lead Connector chat script is intentionally NOT embedded** in `client/index.html` (avoid competing with custom CTA). Comment in HTML explains re-adding from GHL CRM (`loader.js` + `data-widget-id`) if live chat is needed again.
-- **Single floating action:** `client/src/components/LeadFloatingCta.tsx` — orange pill **“Free strategy call”**, `aria-label="Book a free strategy call"`, opens **`LeadCapturePopup`** (email-only lead flow to same webhook). Position uses safe-area; no second widget to avoid overlap.
+## Chat widget + floating CTA (compliance split)
+- **Lead Connector chat** embedded in `client/index.html` — `widgets.leadconnectorhq.com/loader.js`, **`data-widget-id="69de3cc39f3b6f1d886fc688"`**, Location **Pglkea64yintAtcVebhi**. SMS opt-in for numbers collected **in chat** is described in **Privacy Policy** / **Terms**; **forms stay email-only** (no phone field) so A2P consent is not duplicated.
+- **Floating CTA:** `LeadFloatingCta.tsx` — **“Free strategy call”** → `LeadCapturePopup` → `/api/submit-lead`. **Positioned above** the chat launcher (`bottom` calc ~6.5–7.5rem + safe area) so the two don’t overlap.
 
 ## Homepage (`client/src/pages/Home.tsx`) — notable UI
 - **Hero image:** `HERO_IMG` CDN (CloudFront/Manus asset). Stock photo may show non–ScaleBuds shirt branding.
@@ -46,7 +46,7 @@ alwaysApply: true
 - **`Contact.tsx`:** Strategy-call form; **email-first**; policies checkbox; **no** chat-widget SMS path in checkbox copy.
 - **`LeadCapturePopup` / `LeadCaptureBand`:** Email-only; no “use chat for SMS” lines.
 - **`client/src/config/businessContact.ts`:** Legal entity line, address, **email** for footer/legal.
-- **Privacy / Terms:** **Last updated April 15, 2026** — SMS only via **separate disclosed** opt-in (not main form); **no** embedded chat widget disclosure path.
+- **Privacy / Terms:** **Last updated** see files — contact form email-only; **SMS via chat widget** or other disclosed programs; chat disclosure paragraphs restored when widget is embedded.
 
 ## Parent workspace (optional)
 - **`HVAC_Marketing_Website/`** may be Cursor workspace root; **`scalebuds-site/`** is a **separate** Wouter app (header phone removed in repo; do not assume same deploy as `home-services-niche-guide`).
@@ -67,7 +67,7 @@ alwaysApply: true
 - **Edits made:** `scalebuds-site/src/components/Navbar.tsx` — removed `tel:` and visible phone; `scalebuds-site/src/App.tsx` — contact description no longer includes phone number. **Do not reintroduce** business phone there if policy is site-wide email-only.
 
 ## UX decisions already shipped
-- **One primary floating control:** GHL chat embed removed; only **LeadFloatingCta** (“Free strategy call”).
+- **Two entry points:** Lead Connector **chat** (GHL) + branded **Free strategy call** FAB; FAB stacked above chat so both stay usable.
 - **Hero shirt:** CSS overlay masks stock “Peak” / third-party chest logo; replacing `HERO_IMG` with a custom photo is optional for pixel-perfect branding.
 - **Industries:** Manus-inspired **marquee** + **stats** row placed **immediately under hero** (before dual-reality showcase).
 - **GHL webhook body:** Flattened payload + `locationId` / `pipelineId` aliases after GHL “invalid body” on nested objects / GET tests.

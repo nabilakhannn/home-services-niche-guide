@@ -138,7 +138,7 @@ export default function LeadCaptureBand({
             </div>
           </div>
           <p className="text-xs mb-6" style={{ fontFamily: "'DM Sans',sans-serif", color: isDark ? "#94A3B8" : "#64748B" }}>
-            This form is email-only. Need something urgent? Use the full contact page or reply to our email once we reach out.
+            Prefer SMS or a faster reply? Use the chat bubble on this page — we keep this form email-only so it does not conflict with chat opt-in.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between">
             <button

@@ -1,4 +1,4 @@
-// ScaleBuds Marketing: Contact Page (email-first; SMS only via separate disclosed opt-in)
+// ScaleBuds Marketing: Contact Page (email-first form; SMS opt-in via chat widget — GHL compliance)
 import { useState, useEffect } from "react";
 import { Link } from "wouter";
 import Navbar from "@/components/Navbar";
@@ -257,7 +257,7 @@ export default function Contact() {
                         <Link href="/privacy-policy" style={{ color: ORANGE, textDecoration: "underline" }}>Privacy Policy</Link>{" "}
                         and{" "}
                         <Link href="/terms-of-service" style={{ color: ORANGE, textDecoration: "underline" }}>Terms of Service</Link>
-                        . I request follow-up about this inquiry by email. SMS is not started by this form; if we offer SMS later, we will use a separate opt-in where required.
+                        . I request follow-up about this inquiry by email. For SMS, use the website chat widget and provide your mobile number there (separate consent in that tool).
                       </span>
                     </label>
                   </div>
