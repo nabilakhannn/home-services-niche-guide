@@ -4,9 +4,9 @@ Use this to confirm **Phase 2: The Opt-In Architecture (Forms & Checkboxes)** is
 
 ## Phase 2: The Opt-In Architecture (Forms & Checkboxes)
 
-- [x] **Website Contact form (`/contact`)** — Implemented in `client/src/pages/Contact.tsx`:
-  - Full Name, Email\*, Phone Number
-  - **Two separate unchecked-by-default checkboxes** with carrier-style copy:
+- [x] **Website Contact / strategy call form (`/contact`)** — Implemented in `client/src/pages/Contact.tsx`:
+  - Full strategy-call layout: name, email, business, phone, trade/niche, service, optional message; policy + email follow-up checkbox
+  - **Two separate unchecked-by-default SMS checkboxes** with carrier-style copy:
     1. Marketing SMS (HELP / STOP / rates / frequency language)
     2. Non-marketing (transactional) SMS (same style of disclosures)
   - Terms of Service & Privacy Policy links on the form

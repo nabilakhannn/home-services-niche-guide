@@ -43,7 +43,7 @@ alwaysApply: true
 - **LeadCaptureBand** on home: email-only; helper text points to contact page / email (no chat).
 
 ## Forms & compliance copy
-- **`Contact.tsx`:** Compliance-style form — **Full Name**, **Email** (required), **Phone**; separate **marketing** and **transactional** SMS consent checkboxes + Terms/Privacy links; blue **Submit**; `formId: "contact-sms-compliance"`; `smsConsent` true if either SMS box is checked; phone required (10+ digits) when any SMS box is checked.
+- **`Contact.tsx`:** Two-column **Book My Free Strategy Call** form — left column “What to Expect” + mailing box; right column fields (name, email, business, phone, niche, service, message); gray consent block: **policy + email** checkbox, then **two SMS** checkboxes (same TCPA-style copy as before); orange **Book My Free Strategy Call** CTA; `formId: "strategy-call-booking"`; `smsConsent` true if either SMS box is checked; phone required (10+ digits) when any SMS box is checked.
 - **`LeadCapturePopup` / `LeadCaptureBand`:** Email-focused; short forms on home/modals.
 - **`client/src/config/businessContact.ts`:** Legal entity line, address, **email** for footer/legal.
 - **Privacy / Terms:** **Last updated** see files — **Contact page** may collect phone + SMS opt-ins; **SMS also via chat widget** or other disclosed programs.

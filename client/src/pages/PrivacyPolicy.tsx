@@ -4,7 +4,7 @@ import Footer from "@/components/Footer";
 import { BUSINESS_ADDRESS_LINES, BUSINESS_EMAIL } from "@/config/businessContact";
 
 const ORANGE = "#D4622A";
-const LAST_UPDATED = "April 16, 2026";
+const LAST_UPDATED = "April 17, 2026";
 
 export default function PrivacyPolicy() {
   return (
@@ -38,7 +38,7 @@ export default function PrivacyPolicy() {
 
             <h2>3. SMS / Text Message Communications</h2>
             <p>
-              <strong>Website Contact page:</strong> Our Contact form collects your name, email, and optional phone number. You may separately opt in to <strong>marketing</strong> and/or <strong>non-marketing (transactional)</strong> SMS using the checkboxes on that form; those consents are recorded with your submission. If you opt in to SMS, a valid mobile number is required.
+              <strong>Website Contact / strategy call form:</strong> Our Contact page collects your name, email, business name, trade/niche, service interests, optional message, and optional phone number. You must confirm agreement to our Privacy Policy and Terms for email follow-up. You may separately opt in to <strong>marketing</strong> and/or <strong>non-marketing (transactional)</strong> SMS using the two SMS checkboxes; those consents are recorded with your submission. If you opt in to SMS, a valid mobile number is required.
             </p>
             <p>
               <strong>Other lead forms (e.g. homepage):</strong> Short “Get leads” style forms may collect email only; they do not add you to SMS unless you use the Contact page or chat as described below.

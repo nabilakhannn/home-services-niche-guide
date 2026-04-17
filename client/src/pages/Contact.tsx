@@ -1,4 +1,4 @@
-// ScaleBuds Marketing: Contact — compliance-style form (SMS consents + phone); floating CTA removed site-wide
+// ScaleBuds Marketing: Contact — full strategy-call layout + dual SMS opt-in checkboxes (TCPA-style)
 import { useState, useEffect } from "react";
 import { Link } from "wouter";
 import Navbar from "@/components/Navbar";
@@ -6,24 +6,72 @@ import Footer from "@/components/Footer";
 import JsonLdBreadcrumb from "@/components/JsonLdBreadcrumb";
 import type { Crumb } from "@/components/JsonLdBreadcrumb";
 import { SITE_ORIGIN } from "@/content/articles";
+import { SERVICE_NAV_ITEMS } from "@/content/serviceSections";
 import { BUSINESS_ADDRESS_LINES, BUSINESS_EMAIL } from "@/config/businessContact";
 import { usePageSeo } from "@/hooks/usePageSeo";
-import { CheckCircle2 } from "lucide-react";
+import { ArrowRight, CheckCircle2, Clock, Mail, MapPin } from "lucide-react";
 import { toast } from "sonner";
 import { submitLead } from "@/lib/submitLead";
 
 const BUSINESS_NAME = "ScaleBuds Marketing";
+const ORANGE = "#D4622A";
 const CONTACT_BREADCRUMB: Crumb[] = [{ name: "Contact", path: "/contact" }];
+
+const NICHES = [
+  "HVAC",
+  "Plumbing",
+  "Roofing",
+  "Electrical",
+  "Remodeling",
+  "Landscaping",
+  "General contractor",
+  "Other",
+];
+
+const EXPECT_POINTS = [
+  "We audit your current marketing and find revenue leaks",
+  "We show you how many calls you're missing and what they're worth",
+  "We build a custom 90-day growth plan for your business",
+  "Zero pressure. If it's not a fit, we'll tell you.",
+];
 
 function digitsOnly(s: string): string {
   return s.replace(/\D/g, "");
 }
 
+type FormState = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  companyName: string;
+  phone: string;
+  niche: string;
+  service: string;
+  message: string;
+  agreedToTerms: boolean;
+  smsMarketing: boolean;
+  smsTransactional: boolean;
+};
+
+const initialForm: FormState = {
+  firstName: "",
+  lastName: "",
+  email: "",
+  companyName: "",
+  phone: "",
+  niche: "",
+  service: "",
+  message: "",
+  agreedToTerms: false,
+  smsMarketing: false,
+  smsTransactional: false,
+};
+
 export default function Contact() {
   usePageSeo({
-    title: "Contact ScaleBuds Marketing",
+    title: "Book a Free Strategy Call | ScaleBuds Marketing",
     description:
-      "Contact ScaleBuds Marketing — marketing SMS and transactional SMS consent. Home service contractors.",
+      "Book a free strategy call with ScaleBuds Marketing. Marketing and transactional SMS opt-in options. Home service contractors.",
     path: "/contact",
   });
 
@@ -33,7 +81,7 @@ export default function Contact() {
       "@type": "ContactPage",
       url: `${SITE_ORIGIN}/contact`,
       name: "Contact ScaleBuds Marketing",
-      description: "Contact ScaleBuds Marketing for home service contractor marketing.",
+      description: "Book a free strategy call with ScaleBuds Marketing for home service contractor marketing.",
       mainEntity: {
         "@type": "Organization",
         name: BUSINESS_NAME,
@@ -60,26 +108,31 @@ export default function Contact() {
     };
   }, []);
 
-  const [form, setForm] = useState({
-    fullName: "",
-    email: "",
-    phone: "",
-    smsMarketing: false,
-    smsTransactional: false,
-  });
+  const [form, setForm] = useState<FormState>(initialForm);
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>,
+  ) => {
     const { name, value, type } = e.target;
+    const checked = type === "checkbox" ? (e.target as HTMLInputElement).checked : undefined;
     setForm((prev) => ({
       ...prev,
-      [name]: type === "checkbox" ? (e.target as HTMLInputElement).checked : value,
+      [name]: type === "checkbox" ? checked : value,
     }));
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!form.agreedToTerms) {
+      toast.error("Please confirm you agree to the Privacy Policy and Terms of Service.");
+      return;
+    }
+    if (!form.firstName.trim() || !form.lastName.trim() || !form.companyName.trim() || !form.niche) {
+      toast.error("Please fill in all required fields.");
+      return;
+    }
     const phoneDigits = digitsOnly(form.phone);
     if (form.smsMarketing || form.smsTransactional) {
       if (phoneDigits.length < 10) {
@@ -88,11 +141,19 @@ export default function Contact() {
       }
     }
     setLoading(true);
+    const fn = form.firstName.trim();
+    const ln = form.lastName.trim();
     const res = await submitLead({
-      formId: "contact-sms-compliance",
-      fullName: form.fullName.trim(),
+      formId: "strategy-call-booking",
+      firstName: fn,
+      lastName: ln,
+      fullName: `${fn} ${ln}`.trim(),
       email: form.email.trim(),
+      companyName: form.companyName.trim(),
       phone: form.phone.trim() || undefined,
+      niche: form.niche,
+      service: form.service || undefined,
+      message: form.message.trim() || undefined,
       smsMarketingConsent: form.smsMarketing,
       smsTransactionalConsent: form.smsTransactional,
       smsConsent: form.smsMarketing || form.smsTransactional,
@@ -100,6 +161,7 @@ export default function Contact() {
     setLoading(false);
     if (res.ok || res.error === "not_configured") {
       setSubmitted(true);
+      setForm(initialForm);
       return;
     }
     toast.error(res.error || "Submission failed. Please email us or try again.");
@@ -110,160 +172,309 @@ export default function Contact() {
       <Navbar />
 
       <main id="main-content" tabIndex={-1}>
-        <section className="pt-28 pb-8 border-b border-slate-100">
-          <div className="container max-w-lg mx-auto px-4 text-center">
+        <section className="pt-28 pb-6 border-b border-slate-100">
+          <div className="container max-w-6xl mx-auto px-4">
             <JsonLdBreadcrumb items={CONTACT_BREADCRUMB} />
-            <h1
-              className="mt-4"
-              style={{
-                fontFamily: "'Sora',sans-serif",
-                fontWeight: 800,
-                fontSize: "clamp(1.5rem,4vw,1.85rem)",
-                color: "#0F172A",
-                lineHeight: 1.2,
-              }}
-            >
-              Contact {BUSINESS_NAME}
-            </h1>
-            <p className="mt-2 text-sm text-slate-500" style={{ fontFamily: "'DM Sans',sans-serif" }}>
+            <p className="mt-4 text-center text-sm text-slate-500" style={{ fontFamily: "'DM Sans',sans-serif" }}>
               {BUSINESS_ADDRESS_LINES[0]}
             </p>
           </div>
         </section>
 
-        <section className="py-12 md:py-16 bg-slate-50/80">
-          <div className="container max-w-lg mx-auto px-4">
+        <section className="py-12 md:py-16 bg-white">
+          <div className="container max-w-6xl mx-auto px-4">
             {submitted ? (
-              <div className="rounded-2xl border border-slate-200 bg-white p-10 text-center shadow-sm">
+              <div className="max-w-lg mx-auto rounded-2xl border border-slate-200 bg-white p-10 text-center shadow-sm">
                 <div className="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-emerald-50">
                   <CheckCircle2 className="h-8 w-8 text-emerald-600" aria-hidden />
                 </div>
                 <h2 className="text-lg font-bold text-slate-900" style={{ fontFamily: "'Sora',sans-serif" }}>
-                  Thank you
+                  You&apos;re booked in
                 </h2>
-                <p className="mt-2 text-sm text-slate-600" style={{ fontFamily: "'DM Sans',sans-serif", lineHeight: 1.65 }}>
-                  We received your submission. If you opted in to SMS, message frequency may vary. Reply STOP to opt out,
+                <p
+                  className="mt-2 text-sm text-slate-600"
+                  style={{ fontFamily: "'DM Sans',sans-serif", lineHeight: 1.65 }}
+                >
+                  We received your request. If you opted in to SMS, message frequency may vary. Reply STOP to opt out,
                   HELP for help.
                 </p>
               </div>
             ) : (
-              <form
-                onSubmit={handleSubmit}
-                className="rounded-2xl border border-slate-200 bg-white p-6 sm:p-8 shadow-sm"
-                style={{ fontFamily: "'DM Sans',sans-serif" }}
-              >
-                <div className="space-y-5">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14 items-start">
+                {/* Left column */}
+                <div className="space-y-8">
                   <div>
-                    <label className="mb-1.5 block text-sm font-semibold text-slate-900" htmlFor="fullName">
-                      Full Name
-                    </label>
-                    <input
-                      id="fullName"
-                      name="fullName"
-                      type="text"
-                      required
-                      autoComplete="name"
-                      value={form.fullName}
-                      onChange={handleChange}
-                      placeholder="Type your full name"
-                      className="form-input w-full rounded-md border-slate-300"
-                    />
-                  </div>
-                  <div>
-                    <label className="mb-1.5 block text-sm font-semibold text-slate-900" htmlFor="email">
-                      Email<span className="text-red-600">*</span>
-                    </label>
-                    <input
-                      id="email"
-                      name="email"
-                      type="email"
-                      required
-                      autoComplete="email"
-                      value={form.email}
-                      onChange={handleChange}
-                      placeholder="Enter your email"
-                      className="form-input w-full rounded-md border-slate-300"
-                    />
-                  </div>
-                  <div>
-                    <label className="mb-1.5 block text-sm font-semibold text-slate-900" htmlFor="phone">
-                      Phone Number
-                    </label>
-                    <input
-                      id="phone"
-                      name="phone"
-                      type="tel"
-                      autoComplete="tel"
-                      value={form.phone}
-                      onChange={handleChange}
-                      placeholder="Enter your phone number here"
-                      className="form-input w-full rounded-md border-slate-300"
-                    />
+                    <h2
+                      className="text-xl font-bold text-slate-900 mb-6"
+                      style={{ fontFamily: "'Sora',sans-serif" }}
+                    >
+                      What to Expect on the Call
+                    </h2>
+                    <ol className="space-y-4">
+                      {EXPECT_POINTS.map((text, i) => (
+                        <li key={i} className="flex gap-3">
+                          <span
+                            className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-sm font-bold text-white"
+                            style={{ background: ORANGE, fontFamily: "'Sora',sans-serif" }}
+                          >
+                            {i + 1}
+                          </span>
+                          <span className="text-slate-700 pt-1" style={{ fontFamily: "'DM Sans',sans-serif", lineHeight: 1.6 }}>
+                            {text}
+                          </span>
+                        </li>
+                      ))}
+                    </ol>
                   </div>
 
-                  <div className="space-y-4 pt-2">
-                    <label className="flex cursor-pointer items-start gap-3 text-sm leading-relaxed text-slate-700">
+                  <div className="rounded-2xl border border-slate-200 bg-slate-50 p-6">
+                    <h3 className="font-bold text-slate-900 mb-4" style={{ fontFamily: "'Sora',sans-serif" }}>
+                      Mailing &amp; contact
+                    </h3>
+                    <ul className="space-y-3 text-sm text-slate-700" style={{ fontFamily: "'DM Sans',sans-serif" }}>
+                      <li className="flex gap-2">
+                        <MapPin className="h-5 w-5 shrink-0 text-slate-500" aria-hidden />
+                        <span>
+                          {BUSINESS_ADDRESS_LINES.map((line, idx) => (
+                            <span key={idx}>
+                              {line}
+                              {idx < BUSINESS_ADDRESS_LINES.length - 1 ? <br /> : null}
+                            </span>
+                          ))}
+                        </span>
+                      </li>
+                      <li className="flex gap-2 items-center">
+                        <Mail className="h-5 w-5 shrink-0 text-slate-500" aria-hidden />
+                        <a href={`mailto:${BUSINESS_EMAIL}`} className="underline" style={{ color: ORANGE }}>
+                          {BUSINESS_EMAIL}
+                        </a>
+                      </li>
+                      <li className="flex gap-2 items-center">
+                        <Clock className="h-5 w-5 shrink-0 text-slate-500" aria-hidden />
+                        <span>Mon to Fri, 9am to 6pm EST</span>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+
+                {/* Right column — form */}
+                <div
+                  className="rounded-2xl border border-slate-200 bg-white p-6 sm:p-8 shadow-sm"
+                  style={{ fontFamily: "'DM Sans',sans-serif" }}
+                >
+                  <h2
+                    className="text-xl font-bold text-slate-900 mb-6"
+                    style={{ fontFamily: "'Sora',sans-serif" }}
+                  >
+                    Book My Free Strategy Call
+                  </h2>
+                  <form onSubmit={handleSubmit} className="space-y-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div>
+                        <label className="form-label" htmlFor="firstName">
+                          First Name <span className="text-red-600">*</span>
+                        </label>
+                        <input
+                          id="firstName"
+                          name="firstName"
+                          className="form-input"
+                          value={form.firstName}
+                          onChange={handleChange}
+                          placeholder="John"
+                          autoComplete="given-name"
+                          required
+                        />
+                      </div>
+                      <div>
+                        <label className="form-label" htmlFor="lastName">
+                          Last Name <span className="text-red-600">*</span>
+                        </label>
+                        <input
+                          id="lastName"
+                          name="lastName"
+                          className="form-input"
+                          value={form.lastName}
+                          onChange={handleChange}
+                          placeholder="Smith"
+                          autoComplete="family-name"
+                          required
+                        />
+                      </div>
+                    </div>
+                    <div>
+                      <label className="form-label" htmlFor="email">
+                        Email Address <span className="text-red-600">*</span>
+                      </label>
                       <input
-                        type="checkbox"
-                        name="smsMarketing"
-                        checked={form.smsMarketing}
+                        id="email"
+                        name="email"
+                        type="email"
+                        className="form-input"
+                        value={form.email}
                         onChange={handleChange}
-                        className="mt-1 h-4 w-4 shrink-0 rounded border-slate-300"
-                        style={{ accentColor: "#2563eb" }}
+                        placeholder="john@example.com"
+                        autoComplete="email"
+                        required
                       />
-                      <span>
-                        I consent to receive marketing text messages from {BUSINESS_NAME} at the phone number provided.
-                        Frequency may vary. Message &amp; data rates may apply. Text HELP for assistance, reply STOP to opt
-                        out.
-                      </span>
-                    </label>
-                    <label className="flex cursor-pointer items-start gap-3 text-sm leading-relaxed text-slate-700">
+                    </div>
+                    <div>
+                      <label className="form-label" htmlFor="companyName">
+                        Business Name <span className="text-red-600">*</span>
+                      </label>
                       <input
-                        type="checkbox"
-                        name="smsTransactional"
-                        checked={form.smsTransactional}
+                        id="companyName"
+                        name="companyName"
+                        className="form-input"
+                        value={form.companyName}
                         onChange={handleChange}
-                        className="mt-1 h-4 w-4 shrink-0 rounded border-slate-300"
-                        style={{ accentColor: "#2563eb" }}
+                        placeholder="Smith HVAC & Cooling"
+                        autoComplete="organization"
+                        required
                       />
-                      <span>
-                        I consent to receive non-marketing text messages from {BUSINESS_NAME} about my order updates,
-                        appointment reminders etc. Frequency may vary. Message &amp; data rates may apply. Text HELP for
-                        assistance, reply STOP to opt out.
-                      </span>
-                    </label>
-                  </div>
+                    </div>
+                    <div>
+                      <label className="form-label" htmlFor="phone">
+                        Phone Number
+                      </label>
+                      <input
+                        id="phone"
+                        name="phone"
+                        type="tel"
+                        className="form-input"
+                        value={form.phone}
+                        onChange={handleChange}
+                        placeholder="Enter your phone number here"
+                        autoComplete="tel"
+                      />
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div>
+                        <label className="form-label" htmlFor="niche">
+                          Your Trade / Niche <span className="text-red-600">*</span>
+                        </label>
+                        <select
+                          id="niche"
+                          name="niche"
+                          className="form-input"
+                          value={form.niche}
+                          onChange={handleChange}
+                          required
+                        >
+                          <option value="">Select your trade…</option>
+                          {NICHES.map((n) => (
+                            <option key={n} value={n}>
+                              {n}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+                      <div>
+                        <label className="form-label" htmlFor="service">
+                          Service You&apos;re Interested In
+                        </label>
+                        <select id="service" name="service" className="form-input" value={form.service} onChange={handleChange}>
+                          <option value="">Select a service…</option>
+                          {SERVICE_NAV_ITEMS.map((s) => (
+                            <option key={s.id} value={s.label}>
+                              {s.label}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+                    </div>
+                    <div>
+                      <label className="form-label" htmlFor="message">
+                        Tell Us About Your Business (Optional)
+                      </label>
+                      <textarea
+                        id="message"
+                        name="message"
+                        className="form-input min-h-[100px] resize-y"
+                        value={form.message}
+                        onChange={handleChange}
+                        placeholder="How many calls do you get per week? What's your biggest marketing challenge?"
+                        rows={4}
+                      />
+                    </div>
 
-                  <p className="text-sm text-blue-600">
-                    <Link href="/terms-of-service" className="font-medium underline hover:text-blue-700">
-                      Terms of Service
-                    </Link>
-                    <span className="font-medium">{" & "}</span>
-                    <Link href="/privacy-policy" className="font-medium underline hover:text-blue-700">
-                      Privacy Policy
-                    </Link>
-                  </p>
+                    <div className="rounded-xl border border-slate-200 bg-slate-50 p-4 space-y-4">
+                      <label className="flex cursor-pointer items-start gap-3 text-sm leading-relaxed text-slate-700">
+                        <input
+                          type="checkbox"
+                          name="agreedToTerms"
+                          checked={form.agreedToTerms}
+                          onChange={handleChange}
+                          className="mt-1 h-4 w-4 shrink-0 rounded border-slate-300"
+                          style={{ accentColor: ORANGE }}
+                        />
+                        <span>
+                          I have read and agree to the{" "}
+                          <Link href="/privacy-policy" className="font-semibold underline" style={{ color: ORANGE }}>
+                            Privacy Policy
+                          </Link>{" "}
+                          and{" "}
+                          <Link href="/terms-of-service" className="font-semibold underline" style={{ color: ORANGE }}>
+                            Terms of Service
+                          </Link>
+                          . I request follow-up about this inquiry by email.
+                        </span>
+                      </label>
 
-                  <div className="pt-2">
+                      <label className="flex cursor-pointer items-start gap-3 text-sm leading-relaxed text-slate-700">
+                        <input
+                          type="checkbox"
+                          name="smsMarketing"
+                          checked={form.smsMarketing}
+                          onChange={handleChange}
+                          className="mt-1 h-4 w-4 shrink-0 rounded border-slate-300"
+                          style={{ accentColor: ORANGE }}
+                        />
+                        <span>
+                          I consent to receive marketing text messages from {BUSINESS_NAME} at the phone number
+                          provided. Frequency may vary. Message &amp; data rates may apply. Text HELP for assistance,
+                          reply STOP to opt out.
+                        </span>
+                      </label>
+                      <label className="flex cursor-pointer items-start gap-3 text-sm leading-relaxed text-slate-700">
+                        <input
+                          type="checkbox"
+                          name="smsTransactional"
+                          checked={form.smsTransactional}
+                          onChange={handleChange}
+                          className="mt-1 h-4 w-4 shrink-0 rounded border-slate-300"
+                          style={{ accentColor: ORANGE }}
+                        />
+                        <span>
+                          I consent to receive non-marketing text messages from {BUSINESS_NAME} about my order updates,
+                          appointment reminders etc. Frequency may vary. Message &amp; data rates may apply. Text HELP for
+                          assistance, reply STOP to opt out.
+                        </span>
+                      </label>
+                    </div>
+
                     <button
                       type="submit"
                       disabled={loading}
-                      className="rounded-md bg-blue-600 px-6 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-blue-700 disabled:opacity-60"
+                      className="btn-orange w-full justify-center text-base py-3.5 disabled:opacity-70"
                     >
-                      {loading ? "Submitting…" : "Submit"}
+                      {loading ? (
+                        "Sending…"
+                      ) : (
+                        <>
+                          Book My Free Strategy Call <ArrowRight size={18} className="inline ml-1" aria-hidden />
+                        </>
+                      )}
                     </button>
-                  </div>
+                    <p className="text-xs text-center text-slate-500">
+                      Your information is 100% secure. We never share or sell your data. See our{" "}
+                      <Link href="/privacy-policy" className="underline font-medium" style={{ color: ORANGE }}>
+                        Privacy Policy
+                      </Link>
+                      .
+                    </p>
+                  </form>
                 </div>
-              </form>
-            )}
-
-            {!submitted && (
-              <p className="mt-8 text-center text-xs text-slate-500" style={{ fontFamily: "'DM Sans',sans-serif" }}>
-                Questions?{" "}
-                <a href={`mailto:${BUSINESS_EMAIL}`} className="text-slate-700 underline">
-                  {BUSINESS_EMAIL}
-                </a>
-              </p>
+              </div>
             )}
           </div>
         </section>

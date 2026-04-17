@@ -91,7 +91,11 @@ export default function LeadCapturePopup({ open, onOpenChange }: Props) {
             />
           </div>
           <p className="text-xs text-slate-500" style={{ fontFamily: "'DM Sans',sans-serif" }}>
-            To share a mobile number for SMS, use the site chat widget — this form stays email-only.
+            For phone and SMS opt-in (two consent checkboxes), use the{" "}
+            <a href="/contact" className="underline font-medium" style={{ color: ORANGE }}>
+              Contact
+            </a>{" "}
+            page or chat.
           </p>
           <button
             type="submit"
