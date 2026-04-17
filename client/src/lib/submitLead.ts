@@ -9,7 +9,10 @@ export type SubmitLeadInput = {
   niche?: string;
   service?: string;
   message?: string;
+  /** Legacy aggregate; still sent for GHL mapping */
   smsConsent?: boolean;
+  smsMarketingConsent?: boolean;
+  smsTransactionalConsent?: boolean;
 };
 
 const API = "/api/submit-lead";

@@ -14,14 +14,12 @@ import Resources from "./pages/Resources";
 import ArticlePage from "./pages/ArticlePage";
 import ScrollToTop from "./components/ScrollToTop";
 import SkipLink from "./components/SkipLink";
-import LeadFloatingCta from "./components/LeadFloatingCta";
 
 function Router() {
   return (
     <>
       <SkipLink />
       <ScrollToTop />
-      <LeadFloatingCta />
       <Switch>
       <Route path="/" component={Home} />
       <Route path="/services" component={Services} />

@@ -16,6 +16,8 @@ type LeadSubmission = {
   service?: string;
   message?: string;
   smsConsent?: boolean;
+  smsMarketingConsent?: boolean;
+  smsTransactionalConsent?: boolean;
   pageUrl?: string;
 };
 
@@ -41,6 +43,8 @@ function parseLeadBody(raw: unknown): LeadSubmission {
     service: typeof o.service === "string" ? o.service : undefined,
     message: typeof o.message === "string" ? o.message : undefined,
     smsConsent: o.smsConsent === true,
+    smsMarketingConsent: o.smsMarketingConsent === true,
+    smsTransactionalConsent: o.smsTransactionalConsent === true,
     pageUrl: typeof o.pageUrl === "string" ? o.pageUrl : undefined,
   };
 }
@@ -73,6 +77,8 @@ function buildGhlPayload(
     service: lead.service ?? "",
     message: lead.message ?? "",
     smsConsent: Boolean(lead.smsConsent),
+    smsMarketingConsent: Boolean(lead.smsMarketingConsent),
+    smsTransactionalConsent: Boolean(lead.smsTransactionalConsent),
     pageUrl: lead.pageUrl ?? "",
   };
 }

@@ -30,7 +30,7 @@ export default function PrivacyPolicy() {
             <h2>2. Information We Collect</h2>
             <p>We collect the following categories of personal information:</p>
             <ul>
-              <li><strong>Contact Information:</strong> Name, email address, business name (our strategy-call and lead forms do not ask for a phone number; you may provide a mobile number only in our embedded chat widget if you choose)</li>
+              <li><strong>Contact Information:</strong> Name, email address, and phone number when you choose to provide it on our <strong>Contact</strong> page or in our embedded chat widget; optional business details on other forms</li>
               <li><strong>Business Information:</strong> Trade/niche, service interests, business details you provide</li>
               <li><strong>Usage Data:</strong> IP address, browser type, pages visited, time spent on pages</li>
               <li><strong>Communications:</strong> Messages, emails, and call recordings (with consent)</li>
@@ -38,7 +38,10 @@ export default function PrivacyPolicy() {
 
             <h2>3. SMS / Text Message Communications</h2>
             <p>
-              <strong>Website contact form:</strong> Our strategy-call form collects your name, email, and related business details so we can respond by email. It does <strong>not</strong> collect a phone number and does <strong>not</strong> add you to SMS marketing by a checkbox on that form.
+              <strong>Website Contact page:</strong> Our Contact form collects your name, email, and optional phone number. You may separately opt in to <strong>marketing</strong> and/or <strong>non-marketing (transactional)</strong> SMS using the checkboxes on that form; those consents are recorded with your submission. If you opt in to SMS, a valid mobile number is required.
+            </p>
+            <p>
+              <strong>Other lead forms (e.g. homepage):</strong> Short “Get leads” style forms may collect email only; they do not add you to SMS unless you use the Contact page or chat as described below.
             </p>
             <p>
               <strong>Website chat widget:</strong> If you start a conversation in our embedded Lead Connector chat and voluntarily provide a mobile number, you may receive customer-care or follow-up SMS in line with the consent and disclosures presented in that chat experience (including how to opt out).
@@ -46,7 +49,7 @@ export default function PrivacyPolicy() {
             <p>
               <strong>Other programs:</strong> We may also offer SMS through other clearly disclosed programs (for example a written agreement or consent captured on a call).
             </p>
-            <p>When you have opted in to SMS from us (for example through the chat widget or such a program), messages may include:</p>
+            <p>When you have opted in to SMS from us (for example through the Contact page checkboxes, the chat widget, or such a program), messages may include:</p>
             <ul>
               <li>Appointment confirmations and reminders</li>
               <li>Follow-up communications regarding your inquiry</li>
