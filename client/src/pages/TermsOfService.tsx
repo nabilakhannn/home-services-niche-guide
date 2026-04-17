@@ -4,7 +4,7 @@ import Footer from "@/components/Footer";
 import { BUSINESS_ADDRESS_LINES, BUSINESS_EMAIL } from "@/config/businessContact";
 
 const ORANGE = "#D4622A";
-const LAST_UPDATED = "April 16, 2026";
+const LAST_UPDATED = "April 17, 2026";
 
 export default function TermsOfService() {
   return (
@@ -31,7 +31,12 @@ export default function TermsOfService() {
 
             <h2>3. SMS Messaging Terms</h2>
             <p>
-              If you provide a mobile number and opt in to SMS (for example through our website chat widget), you agree to the following terms. Our main contact form does not collect a phone number and does not, by itself, enroll you in SMS marketing; follow-up for that form is by email unless you separately opt in through the chat tool or another disclosed program.
+              If you provide a mobile number and opt in to SMS, you agree to the following terms. Opt-in may happen on our{" "}
+              <strong>Contact</strong> page (separate checkboxes for marketing vs non-marketing/transactional messages,
+              with the disclosures shown next to each checkbox), through our embedded <strong>Lead Connector</strong> chat
+              widget (where GoHighLevel presents comparable consent and disclosures), or through another program we
+              clearly disclose. Short email-only lead forms elsewhere on the site do not add you to SMS unless you use
+              Contact or chat as described.
             </p>
 
             <h3>3.1 Program Description</h3>

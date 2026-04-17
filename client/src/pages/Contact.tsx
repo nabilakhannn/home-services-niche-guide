@@ -171,7 +171,7 @@ export default function Contact() {
                   </div>
                   <div>
                     <label className="mb-1.5 block text-sm font-semibold text-slate-900" htmlFor="email">
-                      Email <span className="text-red-600">*</span>
+                      Email<span className="text-red-600">*</span>
                     </label>
                     <input
                       id="email"
@@ -212,9 +212,9 @@ export default function Contact() {
                         style={{ accentColor: "#2563eb" }}
                       />
                       <span>
-                        I consent to receive <strong>marketing</strong> text messages from {BUSINESS_NAME} at the phone
-                        number provided. Frequency may vary. Message &amp; data rates may apply. Text HELP for assistance,
-                        reply STOP to opt out.
+                        I consent to receive marketing text messages from {BUSINESS_NAME} at the phone number provided.
+                        Frequency may vary. Message &amp; data rates may apply. Text HELP for assistance, reply STOP to opt
+                        out.
                       </span>
                     </label>
                     <label className="flex cursor-pointer items-start gap-3 text-sm leading-relaxed text-slate-700">
@@ -227,19 +227,19 @@ export default function Contact() {
                         style={{ accentColor: "#2563eb" }}
                       />
                       <span>
-                        I consent to receive <strong>non-marketing</strong> text messages from {BUSINESS_NAME} about my
-                        order updates, appointment reminders etc. Frequency may vary. Message &amp; data rates may apply.
-                        Text HELP for assistance, reply STOP to opt out.
+                        I consent to receive non-marketing text messages from {BUSINESS_NAME} about my order updates,
+                        appointment reminders etc. Frequency may vary. Message &amp; data rates may apply. Text HELP for
+                        assistance, reply STOP to opt out.
                       </span>
                     </label>
                   </div>
 
-                  <p className="text-sm">
-                    <Link href="/terms-of-service" className="font-medium text-blue-600 underline hover:text-blue-700">
+                  <p className="text-sm text-blue-600">
+                    <Link href="/terms-of-service" className="font-medium underline hover:text-blue-700">
                       Terms of Service
                     </Link>
-                    {" & "}
-                    <Link href="/privacy-policy" className="font-medium text-blue-600 underline hover:text-blue-700">
+                    <span className="font-medium">{" & "}</span>
+                    <Link href="/privacy-policy" className="font-medium underline hover:text-blue-700">
                       Privacy Policy
                     </Link>
                   </p>

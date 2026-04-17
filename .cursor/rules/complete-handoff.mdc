@@ -31,7 +31,7 @@ alwaysApply: true
 - **Client:** `client/src/lib/submitLead.ts` → `POST /api/submit-lead`.
 
 ## Chat widget (no floating FAB)
-- **Lead Connector chat** embedded in `client/index.html` — `widgets.leadconnectorhq.com/loader.js`, **`data-widget-id="69de3cc39f3b6f1d886fc688"`**, Location **Pglkea64yintAtcVebhi**. SMS opt-in for numbers collected **in chat** is described in **Privacy Policy** / **Terms**.
+- **Lead Connector chat** embedded in `client/index.html` — `widgets.leadconnectorhq.com/loader.js`, **`data-widget-id="69de3cc39f3b6f1d886fc688"`**, Location **Pglkea64yintAtcVebhi**. SMS opt-in **UI for chat** is configured in **GoHighLevel** (not in repo); **Privacy Policy** / **Terms** describe Contact + chat. **`SMS-OPT-IN-CHECKLIST.md`** marks **Phase 2: Opt-In Architecture** for the on-site form (done in `Contact.tsx`) and documents GHL-side parity for chat.
 - **Floating “Free strategy call” FAB** was **removed** from `App.tsx` (no `LeadFloatingCta`). Homepage still uses **`LeadCaptureBand`** / **`LeadCapturePopup`** where applicable.
 
 ## Homepage (`client/src/pages/Home.tsx`) — notable UI
